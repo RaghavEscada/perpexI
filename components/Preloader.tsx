@@ -4,9 +4,9 @@ import gsap from "gsap";
 
 const heroImages = [
   "/s3.webp",
-  "/s4.webp", 
+  "/s5.webp", 
   "/s7.webp",
-  "/s10.webp",
+  "/s4.webp",
 ];
 
 interface PreloaderProps {
