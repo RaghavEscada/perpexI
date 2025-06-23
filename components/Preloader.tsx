@@ -7,8 +7,6 @@ const heroImages = [
   "/s4.webp", 
   "/s7.webp",
   "/s10.webp",
-
- 
 ];
 
 interface PreloaderProps {
@@ -17,13 +15,19 @@ interface PreloaderProps {
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const preloaderRef = useRef<HTMLDivElement>(null);
+  const logoContainerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const logoBackgroundRef = useRef<HTMLDivElement>(null);
   const digit1Ref = useRef<HTMLDivElement>(null);
   const digit2Ref = useRef<HTMLDivElement>(null);
   const digit3Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Set initial nav position (matching HTML version)
+    // Set initial positions
     gsap.set("nav", { y: -150 });
+    gsap.set(logoContainerRef.current, { opacity: 0 });
+    gsap.set(logoRef.current, { y: 100, scale: 0.7, rotation: -5 });
+    gsap.set(logoBackgroundRef.current, { scale: 0, opacity: 0 });
 
     // Split header text into spans
     function splitTextIntoSpans(selector: string) {
@@ -39,7 +43,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
     splitTextIntoSpans(".header h1");
 
-    // Add extra numbers to digit3 (exactly like HTML version)
+    // Add extra numbers to digit3
     if (digit3Ref.current) {
       for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 10; j++) {
@@ -69,56 +73,105 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       });
     }
 
-    // Animation sequence (exactly matching HTML version)
+    // Create main timeline for better synchronization
+    const tl = gsap.timeline();
+
+    // Counter animations
     animate(digit3Ref.current, 5);
     animate(digit2Ref.current, 6);
     animate(digit1Ref.current, 2, 5);
 
-    gsap.to(".progress-bar", {
+    // Progress bar animations
+    tl.to(".progress-bar", {
       width: "30%",
       duration: 2,
       ease: "power4.inOut",
       delay: 7
-    });
-
-    gsap.to(".progress-bar", {
+    })
+    .to(".progress-bar", {
       width: "100%",
       opacity: 0,
       duration: 2,
-      delay: 8.5,
-      ease: "power3.out",
-      onComplete: () => {
-        gsap.set(".pre-loader", { display: "none" });
-        onComplete();
-      }
-    });
-
-    gsap.to(".hero-imgs > div", {
+      delay: 1.5,
+      ease: "power3.out"
+    })
+    
+    // Hero images reveal
+    .to(".hero-imgs > div", {
       clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
-      duration: 1,
+      duration: 1.2,
       ease: "power4.inOut",
-      stagger: 0.25,
-      delay: 9
-    });
-
-    gsap.to(".hero", {
+      stagger: 0.15,
+      delay: 0.5
+    }, "-=1")
+    
+    .to(".hero", {
       scale: 1.3,
       duration: 3,
-      ease: "power3.inOut",
-      delay: 9
-    });
-
-    // End preloader right after image flip animation completes
-    gsap.to(preloaderRef.current, {
+      ease: "power3.inOut"
+    }, "-=2")
+    
+    // Fade out loading elements smoothly
+    .to(".pre-loader", {
       opacity: 0,
-      duration: 0.5,
-      delay: 10.5, // After image flip completes (9 + 1 + 0.25*4 stagger)
-      ease: "power2.out",
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, "-=1.5")
+    
+    // Logo sequence - much smoother
+    .set(logoContainerRef.current, { opacity: 1 })
+    .to(logoBackgroundRef.current, {
+      scale: 1,
+      opacity: 0.1,
+      duration: 1.2,
+      ease: "power3.out"
+    }, "-=0.3")
+    
+    .to(logoRef.current, {
+      y: 0,
+      scale: 1,
+      rotation: 0,
+      duration: 1.5,
+      ease: "back.out(1.7)"
+    }, "-=1")
+    
+    // Logo breathing effect
+    .to(logoRef.current, {
+      scale: 1.05,
+      duration: 1,
+      ease: "power2.inOut",
+      yoyo: true,
+      repeat: 1
+    }, "-=0.5")
+    
+    // Logo exit with style
+    .to(logoBackgroundRef.current, {
+      scale: 1.5,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.in"
+    }, "+=0.5")
+    
+    .to(logoRef.current, {
+      y: -50,
+      scale: 0.9,
+      opacity: 0,
+      rotation: 3,
+      duration: 1,
+      ease: "power2.in"
+    }, "-=0.8")
+    
+    // Final preloader exit
+    .to(preloaderRef.current, {
+      opacity: 0,
+      duration: 1,
+      ease: "power2.inOut",
       onComplete: () => {
         gsap.set(preloaderRef.current, { display: "none" });
         onComplete();
       }
-    });
+    }, "-=0.3");
+
   }, [onComplete]);
 
   const styles = `
@@ -154,6 +207,35 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       gap: 0.5em;
       overflow: hidden;
       z-index: 2;
+    }
+
+    .logo-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .logo-background {
+      position: absolute;
+      width: 80vw;
+      height: 80vh;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+    }
+
+    .perpex-logo {
+      position: relative;
+      width: clamp(250px, 25vw, 400px);
+      height: clamp(150px, 15vw, 250px);
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
     }
 
     .pre-loader p {
@@ -200,6 +282,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       width: 0%;
       height: 4px;
       background: #ffffff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
 
     .hero-imgs {
@@ -291,6 +374,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         position: relative;
         right: -5px;
       }
+
+      .perpex-logo {
+        width: clamp(200px, 30vw, 300px);
+        height: clamp(120px, 18vw, 180px);
+      }
     }
   `;
 
@@ -336,6 +424,21 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             <div className="progress-bar" />
           </div>
 
+          {/* Enhanced PERPEX Logo with background effect */}
+          <div ref={logoContainerRef} className="logo-container">
+            <div ref={logoBackgroundRef} className="logo-background"></div>
+            <div ref={logoRef} className="perpex-logo">
+              <Image
+                src="/perpex.webp"
+                alt="PERPEX Logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                priority
+                sizes="(max-width: 900px) 300px, 400px"
+              />
+            </div>
+          </div>
+
           <div className="hero-imgs">
             {heroImages.map((src, i) => (
               <div key={i}>
@@ -344,18 +447,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                   alt="hero"
                   fill
                   style={{ objectFit: 'cover' }}
-                  priority={i === 0} // Prioritize loading the first image
+                  priority={i === 0}
                   sizes="100vw"
                 />
               </div>
             ))}
           </div>
 
-          <div className="website-content">
-           
-
-           
-          </div>
+          <div className="website-content"></div>
         </section>
       </div>
     </>
