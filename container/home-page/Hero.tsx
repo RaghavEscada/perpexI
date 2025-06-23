@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, Target, TrendingUp, Users, Award, Briefcase, Play } from "lucide-react";
-import MacbookScrollDemo from "@/data/data";
 
 // Enhanced Mouse Position Hook
 interface MousePosition {
@@ -295,7 +294,7 @@ export interface ContainerTextFlipProps {
 }
 
 export function ContainerTextFlip({
-  words = ["Business Leaders", "Entrepreneurs", "Sales Experts", "Industry Pros"],
+  words = ["Business Leaders", "Entrepreneurs", "Sales Masters", "Industry Pros"],
   interval = 2500,
   className,
   textClassName,
@@ -361,40 +360,27 @@ export function ContainerTextFlip({
   );
 }
 
-// Simple Moving Grid Background
+// Enhanced Moving Grid Background with Visible Squared Grids
 const MovingGridBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Single clean moving grid */}
+      {/* Primary large grid - most visible */}
       <div 
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0"
         style={{
           background: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.3) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 1px, transparent 1px)
           `,
-          backgroundSize: "60px 60px",
-          animation: "moveGrid 25s linear infinite"
-        }}
-      />
-
-      {/* Subtle blue accent */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 70%)`,
-          animation: "pulseBlue 8s ease-in-out infinite"
+          backgroundSize: "80px 80px",
+          animation: "moveGridLarge 30s linear infinite"
         }}
       />
       
       <style jsx>{`
-        @keyframes moveGrid {
+        @keyframes moveGridLarge {
           0% { background-position: 0% 0%; }
-          100% { background-position: 60px 60px; }
-        }
-        @keyframes pulseBlue {
-          0%, 100% { opacity: 0.05; }
-          50% { opacity: 0.15; }
+          100% { background-position: 80px 80px; }
         }
       `}</style>
     </div>
@@ -402,22 +388,15 @@ const MovingGridBackground = () => {
 };
 
 // Compact Logo Cloud
-const logos1 = [
-  { name: "Byjus", url: "https://cdn.brandfetch.io/idtntkVe3D/theme/dark/idB5akcINh.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Upgrad", url: "https://cdn.brandfetch.io/idvsI-ggxm/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Interval", url: "https://www.intervaledu.com/static/web/images/logo/logo-dark.png" },
-  { name: "HCL Tech", url: "https://cdn.brandfetch.io/idMbiw2eNO/w/960/h/960/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "XPayBack", url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8w5cYFHW3PdWDJSKF4vWdbptQxodZ8nC68Q&s" },
-];
+const logos1 = Array.from({ length: 35 }, (_, i) => ({
+  name: `Client Logo ${i + 1}`,
+  url: `/l${i + 1}.png`,
+}));
 
-const logos2 = [
-  { name: "Amazon", url: "https://cdn.brandfetch.io/ideEwHhDrj/w/1024/h/300/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Google", url: "https://cdn.brandfetch.io/idOeG0NYWQ/w/1448/h/1448/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Microsoft", url: "https://cdn.brandfetch.io/idkGNnB58L/w/280/h/80/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "IBM", url: "https://cdn.brandfetch.io/id4Ol9YiiE/w/577/h/239/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Oracle", url: "https://cdn.brandfetch.io/idAuvto6zH/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-  { name: "Salesforce", url: "https://cdn.brandfetch.io/idTlKvL568/w/206/h/41/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" },
-];
+const logos2 = Array.from({ length: 34 }, (_, i) => ({
+  name: `Client Logo ${i + 36}`,
+  url: `/l${i + 36}.png`,
+}));
 
 const LogoMarquee = ({ logos, direction = "left", speed = 25 }: { logos: any[], direction?: "left" | "right", speed?: number }) => {
   return (
@@ -429,16 +408,16 @@ const LogoMarquee = ({ logos, direction = "left", speed = 25 }: { logos: any[], 
         }}
       >
         {Array(8).fill(null).map((_, index) => (
-          <div key={index} className="flex gap-8 shrink-0">
+          <div key={index} className="flex gap-4 shrink-0">
             {logos.map((logo, logoIndex) => (
               <div
                 key={logoIndex}
-                className="flex items-center justify-center h-12 w-32 rounded-lg px-4 py-2 hover:scale-105 hover:-translate-y-1 transition-all duration-200"
+                className="flex items-center justify-center h-32 w-60 rounded-lg px-4 py-2 hover:scale-105 hover:-translate-y-1 transition-all duration-200"
               >
                 <img
                   src={logo.url}
                   alt={`${logo.name} logo`}
-                  className="h-8 w-auto max-w-24 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="h-28 w-auto max-w-56 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
@@ -454,16 +433,18 @@ const LogoMarquee = ({ logos, direction = "left", speed = 25 }: { logos: any[], 
       <style jsx>{`
         @keyframes marqueeLeft {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-1000px); }
+          100% { transform: translateX(-4000px); }
         }
         @keyframes marqueeRight {
-          0% { transform: translateX(-1000px); }
+          0% { transform: translateX(-4000px); }
           100% { transform: translateX(0); }
         }
       `}</style>
     </div>
   );
 };
+
+import MacbookScrollDemo from "@/data/data";
 
 // Main Hero Component
 const Hero = () => {
@@ -478,14 +459,25 @@ const Hero = () => {
       {/* Enhanced Creative Moving Grid Background */}
       <MovingGridBackground />
 
-      {/* Moving Particles - Balanced */}
+      {/* ENHANCED: More Moving Particles - Increased from 35 to 120 */}
       <Particles
         className="absolute inset-0 z-10 pointer-events-none"
-        quantity={35}
+        quantity={120}
         color="#ffffff"
         ease={40}
-        size={1.5}
+        size={1.2}
         staticity={60}
+        refresh
+      />
+
+      {/* Additional layer of smaller particles for more density */}
+      <Particles
+        className="absolute inset-0 z-10 pointer-events-none"
+        quantity={80}
+        color="#60a5fa"
+        ease={60}
+        size={0.8}
+        staticity={80}
         refresh
       />
 
@@ -505,9 +497,6 @@ const Hero = () => {
         <div className="flex-1 flex flex-col justify-center px-6 md:px-12 py-4 pt-12">
           <div className="max-w-5xl mx-auto text-center space-y-6">
             
-    
-           
-
             {/* Enhanced Main Heading */}
             <div className="space-y-4 ">
               <h1 
@@ -518,9 +507,9 @@ const Hero = () => {
               >
                 <span className="block font-bold">
                   <img 
-                    src="/perpexlogo.webp" 
+                    src="/perpex.webp" 
                     alt="PerpeX Logo" 
-                    className="mx-auto h-32 md:h-36 lg:h-40 w-auto object-contain bg-white rounded-lg"
+                    className="mx-auto h-32 md:h-36 lg:h-40 w-auto object-contain bg-transparent rounded-lg"
                   />
                 </span>
                 
@@ -530,7 +519,7 @@ const Hero = () => {
                   }`}
                   style={{ transitionDelay: "400ms" }}
                 >
-                  Transforms Students Into
+                  Transforming Youth Into
                 </span>
                 
                 <div
@@ -555,11 +544,11 @@ const Hero = () => {
               }`}
               style={{ transitionDelay: "800ms" }}
             >
-              <p className="text-lg text-white/80 font-medium">
-                Bridge Kerala's 40% youth unemployment with industry-aligned training
+              <p className="text-lg text-slate-400 font-medium">
+                Bridging youth unemployment with industry-aligned practical training
               </p>
-              <p className="text-base text-white/60">
-                Complete sales training, entrepreneurship skills, and guaranteed placement assistance
+              <p className="text-lg text-white">
+                End to End BD Training, Entrepreneurship Readiness, and Guaranteed Results
               </p>
             </div>
 
@@ -590,7 +579,7 @@ const Hero = () => {
               >
                 <span className="flex items-center">
                   <Play className="mr-2 w-4 h-4" />
-                  Watch Demo
+                 Download Brochure
                 </span>
               </button>
             </div>
@@ -598,13 +587,13 @@ const Hero = () => {
 
           {/* Logo Marquees - Now part of main content */}
           <div 
-            className={`mt-6 pb-6 space-y-3 transition-all duration-800 ${
+            className={`mt-6 pb-6 space-y-1 transition-all duration-800 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: "1200ms" }}
           >
             <p className="text-center text-sm text-white/70 font-medium mb-4">
-              Our graduates work at leading companies
+              Our Client Collaboration Network Includes
             </p>
             
             {/* First Marquee */}
@@ -630,21 +619,21 @@ const Hero = () => {
 
             {/* MacBook Component - Enhanced with white background */}
           <div 
-            className={`mt-20 mb-16 transition-all duration-1000 ${
+            className={`mt-1 mb-16 transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             style={{ transitionDelay: "1400ms" }}
           >
-            <div className="bg-white rounded-3xl shadow-2xl shadow-black/20 mx-auto max-w-[90vw] p-12 md:p-16 lg:p-24">
-              <div className="text-center mb-12">
+            <div className="bg-white rounded-3xl shadow-2xl shadow-black/20   mx-auto max-w-[90vw] p-12 md:p-16 lg:p-24">
+              <div className="text-center mb-1">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                  Experience Our Platform
+                  Built on Success, Backed by Results.
                 </h2>
                 <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                   See how our comprehensive training system transforms students into industry-ready professionals
                 </p>
               </div>
-              <div className="transform scale-125 md:scale-150 lg:scale-[2] xl:scale-[2.2] origin-center">
+              <div className="transform scale-150 md:scale-[2] lg:scale-[2.5] xl:scale-[3] origin-center">
                 <MacbookScrollDemo />
               </div>
             </div>
@@ -656,6 +645,10 @@ const Hero = () => {
         @keyframes slideRight {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
         }
       `}</style>
     </div>

@@ -63,19 +63,7 @@ export const MacbookScroll = ({
       ref={ref}
       className="flex min-h-[160vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-0"
     >
-      <motion.h2
-        style={{
-          translateY: textTransform,
-          opacity: textOpacity,
-        }}
-        className="mb-20 text-center text-3xl font-bold text-black dark:text-black"
-      >
-        {title || (
-          <span>
-          WE DO THE BEST AT <span>NUKE MARKETING</span>
-          </span>
-        )}
-      </motion.h2>
+     
       {/* Lid */}
       <Lid src={src} scaleX={scaleX} scaleY={scaleY} rotate={rotate} translate={translate} />
       {/* Base area */}

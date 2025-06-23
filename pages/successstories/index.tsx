@@ -11,9 +11,9 @@ interface ITestimonial {
   src: string;
 }
 
+
 const SuccessStoriesPage = () => {
-    // ✅ Fixed: Wrap testimonials in useMemo to prevent dependency warnings
-    const testimonials: ITestimonial[] = useMemo(() => [
+    const testimonials: ITestimonial[] = [
         {
             quote: "This program was a game-changer for my career. The hands-on projects and mentorship were invaluable.",
             name: "Aisha Khan",
@@ -68,13 +68,12 @@ const SuccessStoriesPage = () => {
             location: "Boston",
             src: "/placeholder.jpg",
         },
-    ], []); // Empty dependency array since this is static data
+    ];
 
     const [programFilter, setProgramFilter] = useState('All');
     const [industryFilter, setIndustryFilter] = useState('All');
     const [locationFilter, setLocationFilter] = useState('All');
 
-    // ✅ Fixed: Now these useMemo hooks won't trigger dependency warnings
     const programs = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.program))], [testimonials]);
     const industries = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.industry))], [testimonials]);
     const locations = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.location))], [testimonials]);
@@ -87,6 +86,7 @@ const SuccessStoriesPage = () => {
             return programMatch && industryMatch && locationMatch;
         });
     }, [testimonials, programFilter, industryFilter, locationFilter]);
+
 
     return (
         <div className="bg-black text-white min-h-screen p-8">
@@ -140,8 +140,7 @@ const SuccessStoriesPage = () => {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         className="bg-gray-900 p-6 rounded-lg shadow-lg"
                     >
-                        {/* ✅ Fixed: Escaped quotes using HTML entities */}
-                        <p className="text-lg italic mb-4">&ldquo;{testimonial.quote}&rdquo;</p>
+                        <p className="text-lg italic mb-4">"{testimonial.quote}"</p>
                         <div className="text-right">
                             <p className="font-semibold">{testimonial.name}</p>
                             <p className="text-sm text-gray-400">{testimonial.designation}</p>
@@ -161,4 +160,4 @@ const SuccessStoriesPage = () => {
     );
 }
 
-export default SuccessStoriesPage;
+export default SuccessStoriesPage; 

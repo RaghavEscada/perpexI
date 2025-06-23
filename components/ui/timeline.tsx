@@ -37,8 +37,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         const progress = Math.max(0, Math.min(1, latest));
-        const sectionProgress = progress * (data.length - 1);
-        const newActiveIndex = Math.round(sectionProgress);
+        const sectionProgress = progress * data.length; // Changed from (data.length - 1)
+        const newActiveIndex = Math.min(Math.floor(sectionProgress), data.length - 1);
 
         if (newActiveIndex >= 0 && newActiveIndex < data.length && newActiveIndex !== activeIndex) {
             setActiveIndex(newActiveIndex);
@@ -65,30 +65,30 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                     <div className="max-w-2xl">
                         <div className="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-8">
                             <p className="text-sm text-blue-400 font-medium uppercase tracking-wider">
-                                Done For You System
+                                Professional Development Journey
                             </p>
                         </div>
 
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-8">
-                            From Dream<br />
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.1] mb-8">
+                            From Learning<br />
                             to <br />
-                            <span className="text-blue-400">Ownership</span>
+                            <span className="text-blue-400">Leadership</span>
                         </h1>
 
                         <div className="space-y-6 mb-12">
                             <p className="text-gray-300 text-xl leading-relaxed">
-                                We help you achieve <span className="text-white font-semibold">time & financial freedom</span> by acquiring and running a profitable,
-                                cash-flowing business within <span className="text-blue-400 font-semibold">30 to 90 days</span>.
+                                Master the journey from <span className="text-white font-semibold">foundational knowledge</span> to becoming a
+                                <span className="text-blue-400 font-semibold"> professional consultant or entrepreneur</span> through our structured development phases.
                             </p>
                             <p className="text-gray-400 text-lg leading-relaxed">
-                                With just <span className="text-white">3-5 hours a week</span> of effort and a tailored
-                                plan based on your expertise and our proven strategies.
+                                Build expertise in <span className="text-white">business strategy, communication, and leadership</span> while
+                                developing the mindset and skills needed for long-term success.
                             </p>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 lg:gap-6">
                             <button className="px-8 lg:px-10 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl text-center">
-                                Start Your Journey
+                                Begin Journey
                             </button>
                             <button className="px-8 lg:px-10 py-4 border border-gray-400 text-gray-300 font-semibold rounded-full hover:bg-gray-800 hover:border-gray-300 transition-all duration-300 text-center">
                                 Learn More
@@ -181,92 +181,47 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     );
 };
 
-// Updated timeline data with enhanced visual elements
+// Updated timeline data with your 5 educational development phases
 const timelineData = [
     {
-        step: "1",
-        title: "Onboarding",
-        content: (
-            <div className="space-y-6">
-                <p className="text-xl font-medium leading-relaxed">
-                    We start by understanding your interests, skill set, strengths and network to create
-                    a personalized acquisition plan with a clear 30-day timeline.
-                </p>
-
-                <div className="grid gap-4 mt-8">
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Clarity</h4>
-                                <p className="text-gray-300 leading-relaxed">Define your ideal business, industry, and size based on your vision and goals.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Confidence</h4>
-                                <p className="text-gray-300 leading-relaxed">Gain a clear, actionable path with measurable milestones to business ownership.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Customized Strategies</h4>
-                                <p className="text-gray-300 leading-relaxed">A personalized acquisition plan identifying how you&apos;ll create and grow your cash-flowing asset.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        step: "2",
-        title: "Acquisition Support",
+        step: "🪴",
+        title: "Inception",
         content: (
             <div className="space-y-6">
                 <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl p-6">
-                    <p className="text-xl font-semibold text-blue-300 mb-3">The Core Phase</p>
+                    <p className="text-xl font-semibold text-blue-300 mb-3">Foundation Building</p>
                     <p className="text-lg leading-relaxed text-gray-200">
-                        From sourcing the best deals to closing them, every step is handled for you.
-                        Our team ensures you avoid costly mistakes through meticulous processes.
+                        Build foundational awareness and mindset needed for entrepreneurship or consultancy.
                     </p>
                 </div>
 
                 <div className="grid gap-4 mt-8">
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-green-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-green-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-green-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Deal Sourcing</h4>
-                                <p className="text-gray-300 leading-relaxed">On-market and off-market opportunities through our extensive network of brokers and direct outreach campaigns.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Personal Vision</h4>
+                                <p className="text-gray-300 leading-relaxed">Clarifying your personal vision and long-term "why" to guide your journey.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-green-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-green-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-green-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Due Diligence</h4>
-                                <p className="text-gray-300 leading-relaxed">Complete analysis and comprehensive vetting process to ensure you make informed, confident decisions.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Business Fundamentals</h4>
+                                <p className="text-gray-300 leading-relaxed">Understanding core business concepts: value creation, customer needs, and problem-solving.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-green-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-green-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-green-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Deal Structuring & Negotiation</h4>
-                                <p className="text-gray-300 leading-relaxed">Creative structures with seller financing and revenue-based payments. Our proven track record saves you thousands.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Entrepreneurial Mindset</h4>
+                                <p className="text-gray-300 leading-relaxed">Developing awareness of what it takes to become an entrepreneur—mindset, risks, and opportunities.</p>
                             </div>
                         </div>
                     </div>
@@ -275,42 +230,44 @@ const timelineData = [
         ),
     },
     {
-        step: "3",
-        title: "Operations Setup",
+        step: "💡",
+        title: "Revelation",
         content: (
             <div className="space-y-6">
-                <p className="text-xl font-medium leading-relaxed">
-                    Buying a business is just the first step. We help you transition smoothly and
-                    start growing from month one with our proven operational systems.
-                </p>
+                <div className="bg-gradient-to-r from-blue-500/15 to-blue-600/8 border border-blue-400/25 rounded-xl p-6">
+                    <p className="text-xl font-semibold text-blue-200 mb-3">Clarity & Communication</p>
+                    <p className="text-lg leading-relaxed text-gray-200">
+                        Gain clarity in business dynamics, sharpen communication, and understand marketing and sales mechanics.
+                    </p>
+                </div>
 
                 <div className="grid gap-4 mt-8">
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/25 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-purple-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Stress-Free Operations</h4>
-                                <p className="text-gray-300 leading-relaxed">We place experienced operators who manage the day-to-day operations for you.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Strategic Communication</h4>
+                                <p className="text-gray-300 leading-relaxed">Building confident, strategic communication for business settings and market positioning.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/25 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-purple-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Systems-Driven Efficiency</h4>
-                                <p className="text-gray-300 leading-relaxed">Implement automation tools and streamlined processes for consistent reporting and smooth operations.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Marketing Mastery</h4>
+                                <p className="text-gray-300 leading-relaxed">Learning modern marketing strategies: content, performance, brand building, and hands-on tools.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/25 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-purple-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Talent Placement</h4>
-                                <p className="text-gray-300 leading-relaxed">Access our vetted network of managers and specialists who help run and grow your business seamlessly.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">Sales & Finance</h4>
+                                <p className="text-gray-300 leading-relaxed">Deep diving into sales strategies and strengthening financial literacy: cash flow, pricing, budgeting.</p>
                             </div>
                         </div>
                     </div>
@@ -319,35 +276,136 @@ const timelineData = [
         ),
     },
     {
-        step: "4",
-        title: "Scale & Grow",
+        step: "🔄",
+        title: "Transition",
         content: (
             <div className="space-y-6">
-                <div className="bg-gradient-to-r from-green-500/20 to-green-600/10 border border-green-500/30 rounded-xl p-6">
-                    <p className="text-xl font-semibold text-green-300 mb-3">Long-term Partnership</p>
+                <div className="bg-gradient-to-r from-blue-600/20 to-blue-700/10 border border-blue-600/30 rounded-xl p-6">
+                    <p className="text-xl font-semibold text-blue-300 mb-3">Theory to Practice</p>
                     <p className="text-lg leading-relaxed text-gray-200">
-                        Turn your business into a scalable, defensible asset that grows in value over time.
-                        We work with you for 30-90 days post-acquisition.
+                        Bridge theory and practice; start forming real-world structures and taking ownership.
                     </p>
                 </div>
 
                 <div className="grid gap-4 mt-8">
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-yellow-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-600/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-yellow-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-yellow-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-500/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Growth Strategy</h4>
-                                <p className="text-gray-300 leading-relaxed">A comprehensive roadmap for revenue optimization, cost efficiency, and strategic market expansion.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">From Idea to Action</h4>
+                                <p className="text-gray-300 leading-relaxed">Moving from idea to action: building a service or business framework.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-yellow-500/30 transition-all duration-300">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-600/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
-                            <div className="w-3 h-3 bg-yellow-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-yellow-400/50"></div>
+                            <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-500/50"></div>
                             <div>
-                                <h4 className="font-bold text-white text-lg mb-2">Ongoing Support</h4>
-                                <p className="text-gray-300 leading-relaxed">Continuous partnership to ensure your business scales successfully and continues to thrive long-term.</p>
+                                <h4 className="font-bold text-white text-lg mb-2">MVP Development</h4>
+                                <p className="text-gray-300 leading-relaxed">Constructing a minimal viable offer or prototype and testing in the real world.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-600/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-500/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Semi-Professional Practice</h4>
+                                <p className="text-gray-300 leading-relaxed">Beginning to operate in a semi-professional capacity (freelance, consulting, side project).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ),
+    },
+    {
+        step: "⚙",
+        title: "Implementation",
+        content: (
+            <div className="space-y-6">
+                <div className="bg-gradient-to-r from-blue-400/20 to-blue-500/10 border border-blue-400/30 rounded-xl p-6">
+                    <p className="text-xl font-semibold text-blue-200 mb-3">Real-World Application</p>
+                    <p className="text-lg leading-relaxed text-gray-200">
+                        Apply everything learned in real scenarios; refine tools and prepare for professional performance.
+                    </p>
+                </div>
+
+                <div className="grid gap-4 mt-8">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Practical Application</h4>
+                                <p className="text-gray-300 leading-relaxed">Reviewing and applying all tools, models, and strategies in practical settings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Simulations & Feedback</h4>
+                                <p className="text-gray-300 leading-relaxed">Participating in simulations, roleplays, or client-like interactions with structured feedback.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-400/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-300 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-300/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Professional Toolkit</h4>
+                                <p className="text-gray-300 leading-relaxed">Enhancing your professional toolkit (templates, proposals, decks, SOPs).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ),
+    },
+    {
+        step: "🔥",
+        title: "Revolution",
+        content: (
+            <div className="space-y-6">
+                <div className="bg-gradient-to-r from-blue-700/20 to-blue-800/10 border border-blue-700/30 rounded-xl p-6">
+                    <p className="text-xl font-semibold text-blue-200 mb-3">Professional Mastery</p>
+                    <p className="text-lg leading-relaxed text-gray-200">
+                        Become client-ready or job-ready; confidently operate as a professional consultant, entrepreneur, or team leader.
+                    </p>
+                </div>
+
+                <div className="grid gap-4 mt-8">
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-700/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-600 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-600/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Personal Brand</h4>
+                                <p className="text-gray-300 leading-relaxed">Finalizing your personal brand and positioning for professional success.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-700/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-600 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-600/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Market Ready</h4>
+                                <p className="text-gray-300 leading-relaxed">Preparing for client acquisition or job interviews with a compelling portfolio.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-gray-800/60 to-gray-800/40 border border-gray-700/50 rounded-xl p-6 hover:border-blue-700/30 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="w-3 h-3 bg-blue-600 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-600/50"></div>
+                            <div>
+                                <h4 className="font-bold text-white text-lg mb-2">Next Steps</h4>
+                                <p className="text-gray-300 leading-relaxed">Mapping out next steps: business launch, freelancing career, or high-performance corporate role.</p>
                             </div>
                         </div>
                     </div>
@@ -358,7 +416,7 @@ const timelineData = [
 ];
 
 // Demo component
-export default function BusinessAcquisitionTimeline() {
+export default function EducationalDevelopmentTimeline() {
     return (
         <div>
             <Timeline data={timelineData} />

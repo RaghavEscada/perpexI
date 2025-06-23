@@ -58,7 +58,7 @@ export default function Navbar() {
                 className="relative"
               >
                 <Image
-                  src="/perpexlogo.webp"
+                  src="/navbar.webp"
                   alt="Logo"
                   width={160}
                   height={160}

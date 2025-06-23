@@ -23,7 +23,7 @@ export const navbarItems = [
   {
     id: 5,
     title: "Student Stories",
-    href: "/student-stories",
+    href: "/successstories",
   },
   {
     id: 6,

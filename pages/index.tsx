@@ -2,7 +2,7 @@
 import { Curve, Footer, Ready } from "@/components";
 import { About, Clients, Hero, Projects, VideoHome, X } from "@/container";
 import { useEffect, useRef } from "react";
-import BusinessAcquisitionTimeline from "@/components/ui/timeline";
+import Marquee from "@/components/Marquee";
 
 export default function Home() {
 	const containerRef = useRef(null);
@@ -29,6 +29,10 @@ export default function Home() {
 		<div ref={containerRef} data-scroll-container>
 			<Curve backgroundColor={"#f1f1f1"}>
 				<Hero />
+				<Marquee
+              title="STEP INTO ₹ISK STEP INTO ₹IZK"
+              className="pb-[50px] lg:pb-[40px] md:pb-[30px] sm:pb-[20px] xm:pb-[15px] text-[540px] leading-[330px] lg:text-[380px] lg:leading-[240px] md:text-[300px] md:leading-[160px] sm:text-[230px] sm:leading-[140px] xm:text-[130px] xm:leading-[80px]"
+            />
 				<Projects />
 				<About />
 				<X />

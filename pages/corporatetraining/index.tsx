@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Star, Building2, TrendingUp, Users, Award, Briefcase, ArrowRight, Sparkles, Globe, Target, Zap, Crown } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const jobRoles = [
   { 
@@ -65,16 +64,14 @@ const LogoMarquee= ({ logos, direction = "left", speed = 25 }: { logos: any[], d
                 }}
                 transition={{ duration: 0.2 }}
               >
-                <Image
+                <img
                   src={logo.url}
                   alt={`${logo.name} logo`}
-                  width={96}
-                  height={32}
                   className="h-8 w-auto max-w-24 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
-                    target.parentElement!.innerHTML = `<span class="text-xs font-semibold text-white/80">${logo.name}</span>`;
+                    target.parentElement!.innerHTML = `<span class=\"text-xs font-semibold text-white/80\">${logo.name}</span>`;
                   }}
                 />
               </motion.div>
@@ -184,7 +181,7 @@ export default function CorporateTrainingPage() {
           <div className="text-center">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-blue-600/10 backdrop-blur-xl border border-blue-400/20 rounded-full px-8 py-3 mb-12 shadow-2xl">
               <Sparkles className="w-6 h-6 text-blue-400" />
-              <span className="text-lg font-bold text-blue-200">India&apos;s Leading Corporate Training</span>
+              <span className="text-lg font-bold text-blue-200">India's Leading Corporate Training</span>
             </div>
             <h1 className="text-7xl md:text-9xl font-black mb-12 leading-none">
               <span className="block bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
@@ -315,7 +312,7 @@ export default function CorporateTrainingPage() {
               Our Corporate Partners
             </h2>
             <p className="text-2xl text-blue-100 max-w-4xl mx-auto font-light">
-              We collaborate with the world&apos;s top organizations to deliver impactful training and talent solutions.
+              We collaborate with the world's top organizations to deliver impactful training and talent solutions.
             </p>
           </div>
           <div className="space-y-8">
@@ -509,7 +506,7 @@ export default function CorporateTrainingPage() {
               What Our Clients Say
             </h2>
             <p className="text-2xl text-blue-100 max-w-4xl mx-auto font-light">
-              &ldquo;The training programs exceeded our expectations and delivered measurable results!&rdquo;<br/>
+              "The training programs exceeded our expectations and delivered measurable results!"<br/>
               <span className="text-blue-200 font-bold">- HR Head, Fortune 500 Company</span>
             </p>
           </div>
@@ -549,7 +546,7 @@ export default function CorporateTrainingPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-blue-800/10 backdrop-blur-xl"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h3 className="text-4xl font-black mb-6 text-white">Ready to Upskill Your Team?</h3>
-          <p className="text-blue-100 mb-12 text-xl font-light">Contact us to unlock your organization&apos;s full potential</p>
+          <p className="text-blue-100 mb-12 text-xl font-light">Contact us to unlock your organization's full potential</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-12 py-5 rounded-full font-bold transition-all duration-500 text-white shadow-2xl hover:shadow-blue-500/25 transform hover:scale-110 flex items-center justify-center gap-3 text-lg">
               Contact Training Team

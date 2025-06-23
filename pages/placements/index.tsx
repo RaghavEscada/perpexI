@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Star, Building2, TrendingUp, Users, Award, Briefcase, ArrowRight, Sparkles, Globe, Target, Zap, Crown } from "lucide-react";
 import { AnimatedTestimonialsDemo } from "@/data/data";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const jobRoles = [
   { 
@@ -66,11 +65,9 @@ const LogoMarquee = ({ logos, direction = "left", speed = 25 }: { logos: any[], 
                 }}
                 transition={{ duration: 0.2 }}
               >
-                <Image
+                <img
                   src={logo.url}
                   alt={`${logo.name} logo`}
-                  width={96}
-                  height={32}
                   className="h-8 w-auto max-w-24 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     // Fallback to text if image fails
@@ -192,7 +189,7 @@ export default function PlacementsPage() {
           <div className="text-center">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-blue-600/10 backdrop-blur-xl border border-blue-400/20 rounded-full px-8 py-3 mb-12 shadow-2xl">
               <Sparkles className="w-6 h-6 text-blue-400" />
-              <span className="text-lg font-bold text-blue-200">India&apos;s Premier Placement Program</span>
+              <span className="text-lg font-bold text-blue-200">India's Premier Placement Program</span>
             </div>
             
             <h1 className="text-7xl md:text-9xl font-black mb-12 leading-none">
@@ -341,7 +338,7 @@ export default function PlacementsPage() {
               Elite Partnerships
             </h2>
             <p className="text-2xl text-blue-100 max-w-4xl mx-auto font-light">
-              Trusted by the world&apos;s most innovative companies to deliver exceptional talent
+              Trusted by the world's most innovative companies to deliver exceptional talent
             </p>
           </div>
           
@@ -386,7 +383,7 @@ export default function PlacementsPage() {
                   Your Journey Starts Here
                 </h2>
                 <p className="text-2xl text-blue-100 max-w-4xl mx-auto mb-12 font-light">
-                  Join our exclusive network and unlock opportunities with the world&apos;s most innovative companies
+                  Join our exclusive network and unlock opportunities with the world's most innovative companies
                 </p>
               </div>
               

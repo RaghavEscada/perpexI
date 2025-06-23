@@ -1,155 +1,241 @@
 import Link from "next/link";
 import Image from "next/image";
-
-import { LinkHover, TextMask } from "@/animation";
+import { cn } from "@/lib/utils";
 import { footerItems, footernavbarItems } from "@/constants";
 import { TextHoverEffectDemo } from "@/data/data";
 
+const navigation = {
+  services: [
+    { name: "PerpeX Institute", href: "#" },
+    { name: "SaleX", href: "#" },
+    { name: "MarketriX", href: "#" },
+    { name: "PlaceX", href: "#" },
+  ],
+  company: [
+    { name: "About Us", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Blog", href: "#" },
+    { name: "Contact", href: "#" },
+  ],
+  quickLinks: [
+    { name: "Placements", href: "#" },
+    { name: "Corporate Training", href: "#" },
+    { name: "Student Stories", href: "#" },
+    { name: "About Us", href: "#" },
+    { name: "Contact", href: "#" },
+  ],
+  legal: [
+    { name: "Privacy Policy", href: "#" },
+    { name: "Terms of Service", href: "#" },
+    { name: "Legal Terms", href: "https://legislative.gov.in/legal-glossary/" },
+  ],
+};
 
 export default function Footer() {
-	const phrase = ["*", "PERPETUAL", "EXCELLENCE."];
-	const phrase1 = ["#PERPEX", ""];
-	return (
-		<footer className="w-full padding-x z-30 relative pt-[40px] bg-white flex flex-col justify-between rounded-t-[20px]">
-			<div className="w-full flex justify-between sm:flex-col xm:flex-col">
-				<div className="flex flex-col justify-between sm:w-full xm:w-full w-1/2">
-					<h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-black uppercase">
-						<TextMask>{phrase}</TextMask>
-					</h1>
-				</div>
-				<div className="h-full flex flex-col justify-between sm:w-full xm:w-full w-1/2">
-					<div>
-						<h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-blue-700 uppercase">
-							<TextMask>{phrase1}</TextMask>
-						</h1>
-						<div className="pt-[50px]">
-							<h1 className="paragraph font-medium font-NeueMontreal text-black pb-[20px]">
-								Socials:
-							</h1>
-							{footerItems.map((item) => (
-								<LinkHover
-									title={item.title}
-									href={item.href}
-									key={item.id}
-									className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium text-black capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-								/>
-							))}
-						</div>
-						<div className="flex justify-between">
-							<div className="pt-[50px]">
-								<h1 className="paragraph font-medium font-NeueMontreal text-black pb-[20px]">
-									Studio:
-								</h1>
-								<div className="flex flex-col gap-y-[10px]">
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium text-black capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title={`Al Rahaba Arcade,`}
-										href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
-									/>
-									<LinkHover
-										className="before:h-[1px] text-black  after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title={`, Chalappuram,`}
-										href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
-									/>
-									<LinkHover
-										className="before:h-[1px] text-black after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title=", Calicut,"
-										href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
-									/>
-									<LinkHover
-										className="before:h-[1px] text-black  after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Kerala - 673002"
-										href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
-									/>
-								</div>
-							</div>
-							{/* <div className="pt-[50px]">
-								<h1 className="paragraph font-medium font-NeueMontreal text-black pb-[20px]">
-									Move:
-								</h1>
-								{footernavbarItems.map((item) => (
-									<LinkHover
-										key={item.id}
-										title={item.title}
-										href={item.href}
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium text-black capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-									/>
-								))}
-							</div> */}
-						</div>
+  return (
+    <footer className="w-full bg-black text-white min-h-screen flex flex-col px-8 lg:px-16">
+      <div className="max-w-7xl mx-auto flex-1 flex flex-col justify-between py-8">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1">
+          {/* Left - Brand & Contact */}
+          <div className="space-y-6">
+            <Link href="/" className="block w-fit">
+              <div className="flex items-center space-x-3">
+                <Image
+                  src="/navbar.webp"
+                  alt="perpex logo"
+                  width={260}
+                  height={260}
+                  className="rounded-lg"
+                />
+                <div className="text-xl font-bold">
+                  <span className="text-white">Kerala's #1 Practical Business School</span>
+      
+                </div>
+              </div>
+            </Link>
+            
+            <div className="space-y-2">
+              <h2 className="text-lg font-bold font-FoundersGrotesk text-white uppercase leading-tight">
+                *PERPETUAL EXCELLENCE.
+              </h2>
+              <h3 className="text-sm font-semibold font-FoundersGrotesk text-blue-500 uppercase">
+                #PERPEX
+              </h3>
+            </div>
+            
+            <p className="text-gray-400 text-sm max-w-sm">
+              Delivering perpetual excellence in data analytics and business intelligence solutions.
+            </p>
 
+            {/* Contact Info - Compact */}
+            <div className="space-y-3 text-sm">
+              <div>
+                <span className="text-gray-300">📞 </span>
+                <a
+                  href="https://wa.me/919745100036"
+                  target="_blank"
+                  className="text-green-400 hover:text-green-300 font-medium"
+                >
+                  +91 97451 00036
+                </a>
+                <span className="text-gray-500 mx-2">•</span>
+                <a
+                  href="https://wa.me/919745100046"
+                  target="_blank"
+                  className="text-green-400 hover:text-green-300"
+                >
+                  97451 00046
+                </a>
+              </div>
+              
+              <div>
+                <span className="text-gray-300">📧 </span>
+                <a href="mailto:info@perpex.in" className="text-blue-400 hover:text-blue-300">
+                  info@perpex.in
+                </a>
+              </div>
 
-						<div className="pt-[50px] flex gap-x-[20px]">
-							<h1 className="paragraph font-medium font-NeueMontreal text-black">
-								Contact Number :
-								<a
-									href="https://wa.me/919745100036?text=Dear%20Perpex%20Insights%20Team%2C%20I%20hope%20you%20are%20doing%20well.%20I%20am%20interested%20in%20learning%20more%20about%20your%20services%20and%20ongoing%20projects.%20Could%20you%20please%20provide%20more%20details%20or%20let%20me%20know%20a%20suitable%20time%20to%20discuss%20further%3F%20Looking%20forward%20to%20your%20response.%20Best%20regards%2C%20Client"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-green-600 font-bold underline"
-								>
-									97451 00036
-								</a>
-							</h1>
+              <div>
+                <span className="text-gray-300">📍 </span>
+                <a 
+                  href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
+                  target="_blank"
+                  className="text-gray-400 hover:text-white"
+                >
+                  Al Rahaba Arcade, Chalappuram, Calicut
+                </a>
+              </div>
 
-							<h1 className="paragraph font-medium font-NeueMontreal text-black">
-								Email ID:
-							</h1>
-							<LinkHover
-								title="info@perpex.in"
-								href="info@perpex.in"
-								className="before:h-[1px] after:h-[1px] paragraph font-medium before:bottom-[-3px] after:bottom-[-3px]"
-							/>
+              <div className="text-xs space-y-1">
+                <a href="mailto:Support@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
+                  Support@perpexbschool.in
+                </a>
+                <a href="mailto:Admissions@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
+                  Admissions@perpexbschool.in
+                </a>
+              </div>
+            </div>
 
+            {/* Social Icons - Compact */}
+            <div className="flex items-center space-x-3">
+              {footerItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-all"
+                >
+                  <span className="text-xs font-bold">{item.title.charAt(0)}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-						</div>
+          {/* Middle - Map */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white">Visit Our Corporate Office</h3>
+            <div className="w-full h-64 rounded-lg overflow-hidden border border-gray-700">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15650.234567890123!2d75.7810!3d11.2588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba659b4d2ec1c3d%3A0x12345!2sChalappuram%2C%20Kozhikode%2C%20Kerala!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                className="grayscale hover:grayscale-0 transition-all duration-300 filter brightness-90"
+              ></iframe>
+            </div>
+            <a 
+              href="https://maps.app.goo.gl/hawzhUzsAsMGhQMG9"
+              target="_blank"
+              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-sm"
+            >
+              📍 Get Directions
+            </a>
+          </div>
 
-						<div className="pt-[50px] flex gap-x-[20px]">
+          {/* Right - Links */}
+          <div className="grid grid-cols-2 gap-6">
+            {/* Services & Company */}
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Services</h4>
+                <ul className="space-y-2">
+                  {navigation.services.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="w-full pt-[40px] pb-[30px] flex justify-between sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px]">
-				<div className="w-auto bg-white rounded-lg p-4 shadow-sm">
-					<Link href={"/"}>
-						<Image
-							src="/perpexlogo.webp"
-							alt="perpex logo"
-							width={120}
-							height={120}
-						/>
-					</Link>
-				</div>
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Company</h4>
+                <ul className="space-y-2">
+                  {navigation.company.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-				<div className="w-1/2 h-full flex gap-[10px] justify-between items-end sm:w-full xm:w-full sm:flex-col xm:flex-col sm:items-start xm:items-start">
-					<div className="flex sm:flex-col xm:flex-col gap-[10px]">
-						<h1 className="paragraph font-medium font-NeueMontreal text-black opacity-40">
-							© PerpeX Insights.
-						</h1>
-						<LinkHover
-							title="Legal Terms"
-							href="https://legislative.gov.in/legal-glossary/"
-							className="before:h-[1px] after:h-[1px] paragraph font-medium text-black opacity-40 before:bottom-[-3px] after:bottom-[-3px]"
-						/>
-					</div>
-					<div>
+            {/* Quick Links & Legal */}
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Quick Links</h4>
+                <ul className="space-y-2">
+                  {navigation.quickLinks.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-						{/* <LinkHover
-							title="Website by Raghav"
-							href="https://raghavkrishnaportfolio.vercel.app/"
-							className="before:h-[1px] after:h-[1px] paragraph font-medium text-black opacity-40 before:bottom-[-3px] after:bottom-[-3px]"
-						/> */}
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Legal</h4>
+                <ul className="space-y-2">
+                  {navigation.legal.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        {/* Bottom - Copyright & Text Effect */}
+        <div className="mt-6 space-y-4">
+          <div className="border-t border-gray-800 pt-4">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-2">
+              <p className="text-gray-500 text-sm">
+                © {new Date().getFullYear()} PerpeX Insights. All rights reserved.
+              </p>
+              <p className="text-gray-600 text-xs">
+                Crafted with excellence in Kerala, India
+              </p>
+            </div>
+          </div>
 
-
-					</div>
-				</div>
-
-			</div>
-			<div className="w-full bottom-10 left-0 z-50 bg-white">
-				<TextHoverEffectDemo />
-			</div>
-		</footer>
-	);
+          {/* Text Hover Effect - Compact */}
+          <div className="w-full">
+            <TextHoverEffectDemo />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

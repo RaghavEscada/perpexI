@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight, Instagram, Linkedin, MessageCircle, Award, Users, BookOpen, TrendingUp, CheckCircle, Star, Briefcase, Target, GraduationCap, Rocket, Clock } from 'lucide-react';
+import { AnimatePresence, motion } from "framer-motion";
 import AdmissionsPage from '@/components/ui/timeline';
-
 
 // Add type definitions for GSAP and ScrollTrigger
 declare global {
@@ -39,17 +39,17 @@ const socialLinks = [
 
 const stats = [
   { number: "100+", label: "CEOs Approved", target: 100, suffix: "+" },
-  { number: "1500+", label: "Students Trained", target: 1500, suffix: "+" },
-  { number: "95%", label: "Placement Rate*", target: 95, suffix: "%" },
-  { number: "20+", label: "Industry Partners", target: 20, suffix: "+" }
+  { number: "1500+", label: "Talents Upskilled", target: 1500, suffix: "+" },
+  { number: "98%", label: "Success Rate", target: 98, suffix: "%" },
+  { number: "150+", label: "Industry Partners", target: 150, suffix: "+" }
 ];
 
 const whyChooseUs = [
-  { icon: <Users className="w-6 h-6" />, title: "Hands-on Training", description: "Learn by doing with real-world projects" },
-  { icon: <Rocket className="w-6 h-6" />, title: "BYOB - Build Your Own Business", description: "Create your startup during the program" },
-  { icon: <Award className="w-6 h-6" />, title: "100+ CEOs Approved", description: "Curriculum endorsed by industry leaders" },
-  { icon: <Star className="w-6 h-6" />, title: "Mentorship from CXOs", description: "Direct guidance from C-level executives" },
-  { icon: <CheckCircle className="w-6 h-6" />, title: "100% Placement Guarantee*", description: "Assured career placement support" }
+  { icon: <Users className="w-6 h-6" />, title: "Hands-on Training", description: "Learn by doing with real-world projects", example: "E.g., Pitch to real clients during the program.", tip: "Pro tip: Practice makes perfect!" },
+  { icon: <Rocket className="w-6 h-6" />, title: "BYOB - Build Your Own Business", description: "Create your startup during the program", example: "E.g., Launch your MVP before graduation.", tip: "Did you know? 70% of our students launch a project." },
+  { icon: <Award className="w-6 h-6" />, title: "100+ CEOs Approved", description: "Curriculum endorsed by industry leaders", example: "E.g., Guest lectures from top CEOs.", tip: "Network with the best!" },
+  { icon: <Star className="w-6 h-6" />, title: "Mentorship from CXOs", description: "Direct guidance from C-level executives", example: "E.g., 1:1 mentorship sessions.", tip: "Ask your mentor about their biggest career lesson." },
+  { icon: <CheckCircle className="w-6 h-6" />, title: "100% Placement Guarantee*", description: "Assured career placement support", example: "E.g., Mock interviews and resume workshops.", tip: "Stay proactive with your placement coach." }
 ];
 
 const journeySteps = [
@@ -61,7 +61,7 @@ const journeySteps = [
   },
   {
     step: "2", 
-    name: "Train",
+    name: "Get Trained",
     description: "Learn from industry experts through hands-on training and real-world case studies",
     icon: <Users className="w-6 h-6" />
   },
@@ -79,8 +79,8 @@ const journeySteps = [
   },
   {
     step: "5",
-    name: "Get Hired",
-    description: "Land your dream job with our 100% placement guarantee and career support",
+    name: "Launch Yourself",
+    description: "Launch the 'UPDATED' Version of yourself, ready to disrupt the market",
     icon: <Briefcase className="w-6 h-6" />
   }
 ];
@@ -287,6 +287,30 @@ const timelineData = [
 ];
 
 const ScrollAnimationSection = () => {
+  // Define the 5-phase curriculum data
+  const whyChooseUs = [
+    { 
+      icon: "🎯", 
+      title: "Phase 1: Inception"
+    },
+    { 
+      icon: "📚", 
+      title: "Phase 2: Revelation"
+    },
+    { 
+      icon: "🚀", 
+      title: "Phase 3: Transition"
+    },
+    { 
+      icon: "⚡", 
+      title: "Phase 4: Implementation"
+    },
+    { 
+      icon: "⭐", 
+      title: "Phase 5: Revolution"
+    }
+  ];
+
   useEffect(() => {
     // Load GSAP and ScrollTrigger dynamically
     const loadGSAP = async () => {
@@ -339,28 +363,28 @@ const ScrollAnimationSection = () => {
 
         const transforms = [
           [
-            [10, 30, -5, 5],
-            [10, -5, -25, 10],
+            [5, 8, 0, 1],
+            [2, 0, -3, 1],
           ],
           [
-            [0, 27.5, -5, 7.5],
-            [-15, 7.5, -25, 15],
+            [0, 6, 0, 2],
+            [-3, 1, -4, 2],
           ],
           [
-            [0, 32.5, -5, 2.5],
-            [7.5, -2.5, -20, 30],
+            [0, 7, 0, 0],
+            [1, -0, -3, 4],
           ],
           [
-            [0, 30, 15, -40],
-            [10, -5, 30, 2.5],
+            [0, 8, 3, -4],
+            [2, 0, 4, 0],
           ],
           [
-            [0, 35, -7.5, 15],
-            [12.5, -7.5, 30, 47.5],
+            [0, 9, -1, 3],
+            [3, -1, 4, 6],
           ],
           [
-            [5, 25, -10, 12.5],
-            [7.5, -10, -25, 20],
+            [1, 5, -2, 3],
+            [1, -2, -4, 3],
           ],
         ];
 
@@ -475,121 +499,281 @@ const ScrollAnimationSection = () => {
           position: absolute;
           top: 10%;
           left: 100%;
-          width: min(325px, 90vw);
-          height: min(500px, 80vh);
+          width: min(420px, 90vw);
+          height: min(620px, 85vh);
           background-color: #ffffff;
-          border-radius: 1em;
-          padding: 0.5em;
+          border-radius: 1.5em;
+          padding: 0;
           will-change: transform;
           z-index: 2;
           border: 1px solid #e5e7eb;
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.12);
+          overflow: hidden;
         }
 
-        .scroll-card .card-icon {
-          width: 100%;
-          height: 30%;
-          border-radius: 1em;
-          overflow: hidden;
+        .card-header {
           background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1em;
+          padding: 1.5em;
+          text-align: center;
+          position: relative;
+        }
+
+        .card-header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+          opacity: 0.3;
+        }
+
+        .card-icon-wrapper {
+          position: relative;
+          z-index: 1;
+          margin-bottom: 1.25em;
+        }
+
+        .card-title {
+          position: relative;
+          z-index: 1;
+          color: white;
+          font-size: 1.5em;
+          font-weight: 700;
+          margin: 0;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .card-content {
-          width: 100%;
-          height: 65%;
+          padding: 1.5em 2em 1.5em;
+          height: calc(100% - 160px);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          color: #1f2937;
         }
 
-        .card-content h2 {
-          font-size: clamp(20px, 4vw, 28px);
+        .content-section {
+          margin-bottom: 1.25em;
+        }
+
+        .section-title {
+          font-size: 0.8em;
           font-weight: 600;
-          letter-spacing: -0.01em;
-          margin: 0 0 0.5em 0;
-          color: #1e3a8a;
-          line-height: 1.2;
+          color: #3b82f6;
+          margin-bottom: 0.5em;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
-        .card-content p {
-          font-size: clamp(14px, 2.5vw, 16px);
-          font-weight: 400;
-          letter-spacing: -0.005em;
-          margin: 0 0 1em 0;
-          color: #6b7280;
+        .section-list {
+          font-size: 0.85em;
+          color: #374151;
           line-height: 1.5;
         }
 
-        .card-meta {
-          font-size: clamp(12px, 2vw, 14px);
+        .section-list li {
+          margin-bottom: 0.25em;
+          padding-left: 0.5em;
+        }
+
+        .card-activity {
+          background: #f8fafc;
+          padding: 1em;
+          border-radius: 0.75em;
+          margin-bottom: 1.5em;
+          border: 1px solid #e2e8f0;
+        }
+
+        .activity-label {
+          font-size: 0.8em;
+          font-weight: 600;
           color: #3b82f6;
+          margin-bottom: 0.75em;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .activity-text {
+          font-size: 0.95em;
+          color: #374151;
           font-weight: 500;
-          margin-bottom: 1em;
+          line-height: 1.5;
         }
 
         .card-cta {
           background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
           color: white;
           border: none;
-          padding: 0.75em 1.5em;
-          border-radius: 0.5em;
+          padding: 1em 2em;
+          border-radius: 0.75em;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 0.95em;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
+          width: 100%;
+          border: 2px solid transparent;
         }
 
         .card-cta:hover {
           transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+          background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+
+        .card-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
         }
 
         @media (max-width: 768px) {
           .scroll-card {
-            width: 300px;
-            height: 400px;
+            width: 360px;
+            height: 580px;
+          }
+          
+          .card-header {
+            padding: 1.5em 1.5em 1.25em;
+          }
+          
+          .card-content {
+            padding: 1.25em 1.5em 1.25em;
+            height: calc(100% - 140px);
+          }
+          
+          .content-section {
+            margin-bottom: 1em;
+          }
+          
+          .section-list {
+            font-size: 0.8em;
+          }
+          
+          .card-activity {
+            padding: 0.85em;
+            margin-bottom: 1.25em;
           }
         }
       `}</style>
 
       <section className="scroll-section scroll-sticky">
         <div className="scroll-sticky-header">
-          <h1>Your Journey</h1>
+          <h1>Perpetual Excellence</h1>
         </div>
 
-        {journeySteps.map((step, index) => (
+        {whyChooseUs.map((item, index) => (
           <div key={index} className="scroll-card">
-            <div className="card-icon">
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ffffff',
-                textAlign: 'center'
-              }}>
-                <div style={{
-                  fontSize: '2rem',
-                  fontWeight: 'bold',
-                  marginBottom: '0.5rem'
-                }}>
-                  {step.step}
-                </div>
-                <span className="text-white text-2xl">{step.icon}</span>
+            {/* Card Header with Icon and Title */}
+            <div className="card-header">
+              <div className="card-icon-wrapper">
+                <span className="text-white text-4xl">{item.icon}</span>
               </div>
+              <h2 className="card-title">{item.title}</h2>
             </div>
+
+            {/* Card Content */}
             <div className="card-content">
               <div>
-                <h2>{step.name}</h2>
-                <p>{step.description}</p>
+                {/* What You Learn */}
+                <div className="content-section">
+                  <div className="section-title">What You Learn</div>
+                  <ul className="section-list">
+                    {index === 0 && (
+                      <>
+                        <li>• Find your purpose and business basics</li>
+                        <li>• Spot market needs and customer problems</li>
+                        <li>• Understand fundamental business concepts</li>
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        <li>• How to register and legally set up your business</li>
+                        <li>• Complete business registration process</li>
+                        <li>• Legal documentation and compliance requirements</li>
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        <li>• Manage money, budgeting, and risks</li>
+                        <li>• Learn marketing and sales basics</li>
+                        <li>• Improve negotiation and leadership skills</li>
+                      </>
+                    )}
+                    {index === 3 && (
+                      <>
+                        <li>• Prepare and deliver strong investor pitches</li>
+                        <li>• Develop sales skills and close deals</li>
+                        <li>• Improve based on feedback</li>
+                      </>
+                    )}
+                    {index === 4 && (
+                      <>
+                        <li>• Launch and grow your business</li>
+                        <li>• Understand key job roles and career options</li>
+                        <li>• Learn about seed funding and growth</li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+
+                {/* What You Do */}
+                <div className="content-section">
+                  <div className="section-title">What You Do</div>
+                  <ul className="section-list">
+                    {index === 0 && (
+                      <>
+                        <li>• Map your vision and explore market gaps</li>
+                        <li>• Study examples of successful startups</li>
+                        <li>• Create detailed customer personas</li>
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        <li>• Complete business registration process</li>
+                        <li>• Set up legal documentation</li>
+                        <li>• Understand compliance requirements</li>
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        <li>• Create your business plan and marketing approach</li>
+                        <li>• Work on budgeting and risk plans</li>
+                        <li>• Practice negotiation exercises</li>
+                      </>
+                    )}
+                    {index === 3 && (
+                      <>
+                        <li>• Build and present your pitch</li>
+                        <li>• Practice sales techniques</li>
+                        <li>• Get feedback and improve</li>
+                      </>
+                    )}
+                    {index === 4 && (
+                      <>
+                        <li>• Practice running your business</li>
+                        <li>• Prepare your career and network</li>
+                        <li>• Work towards getting seed funding</li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+
+                {/* BYOB Activities */}
+                <div className="card-activity">
+                  <div className="activity-label">BYOB Activities</div>
+                  <div className="activity-text">
+                    {index === 0 && "Vision Mapping Workshop • Customer Persona Development"}
+                    {index === 1 && "Business Registration Process • Legal Documentation Setup"}
+                    {index === 2 && "Marketing Strategy Blueprint • Financial Planning Workshop"}
+                    {index === 3 && "Pitch Practice & Investor Simulation • Digital Marketing Campaigns"}
+                    {index === 4 && "Job Role & Leadership Simulation • Business Scaling Strategy"}
+                  </div>
+                </div>
               </div>
+
+              {/* CTA Button */}
               <button className="card-cta">
-                Learn More
+                Start Phase {index + 1}
               </button>
             </div>
           </div>
@@ -662,10 +846,10 @@ const AnimatedStats = () => {
       <div className="absolute top-10 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-10 right-1/4 w-24 h-24 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
       
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative pt-0 max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-7xl md:text-7xl font-light text-white mb-4 tracking-wide">
+          <h2 className="text-7xl md:text-7xl pt-0 font-light text-white mb-4 tracking-wide">
             Proven Results
           </h2>
          
@@ -726,42 +910,249 @@ const AnimatedStats = () => {
   );
 };
 
-export default function BusinessDevelopmentSite() {
+// Animated Programs Components
+const ProgramCard = ({ data }: { data: any }) => {
+  const [hovered, setHovered] = React.useState(false);
+
   return (
-    <div className="bg-white text-gray-900">
-      {/* Hero Section */}
-      <section className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 pt-20 px-4 py-12">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          {/* Header */}
-          <div className="space-y-6">
-            <div className="inline-flex items-center px-4 py-2 bg-white text-blue-900 rounded-full text-sm font-medium">
-              <GraduationCap className="w-4 h-4 mr-2" />
-              Business Development Training
-            </div>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="border border-white/20 flex items-center justify-center w-full mx-auto p-6 relative h-[28rem] rounded-3xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-white/40 bg-white/10 shadow-lg hover:shadow-xl"
+    >
+      <Icon className="absolute h-8 w-8 -top-3 -left-3 text-white/20" />
+      <Icon className="absolute h-8 w-8 -bottom-3 -left-3 text-white/20" />
+      <Icon className="absolute h-8 w-8 -top-3 -right-3 text-white/20" />
+      <Icon className="absolute h-8 w-8 -bottom-3 -right-3 text-white/20" />
 
-            <h1 className="text-6xl md:text-8xl font-light leading-tight text-white">
-              Build Your
-              <br />
-              <span className="font-normal">Business Future</span>
-            </h1>
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="h-full w-full absolute inset-0"
+          >
+            <CanvasRevealEffect
+              animationSpeed={3}
+              containerClassName={`${data.containerColor} rounded-3xl overflow-hidden`}
+              colors={data.colors}
+              dotSize={2}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-            <p className="text-xl font-light text-blue-100 max-w-2xl mx-auto">
-              Transform your career with hands-on business development training from industry experts.
-            </p>
+      <div className="relative z-20 text-center w-full">
+        {/* Default State - Icon + Title Button */}
+        <div 
+          className={`text-center transition-all duration-300 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] min-w-40 mx-auto flex flex-col items-center justify-center ${
+            hovered ? '-translate-y-4 opacity-0' : 'translate-y-0 opacity-100'
+          }`}
+        >
+          <div className={`text-7xl mb-6 transition-transform duration-300 ${hovered ? 'scale-110' : 'scale-100'}`}>
+            {data.icon}
           </div>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-900 px-8 py-4 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center justify-center">
-              Start Your Journey
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </button>
-            <button className="border border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white/10 transition-colors">
-              View Programs
-            </button>
-          </div>
+          <ProgramButton title={data.title} duration={data.duration} />
         </div>
-      </section>
+
+        {/* Revealed State - Full Details */}
+        <div 
+          className={`transition-all duration-300 px-6 ${
+            hovered ? 'opacity-100 -translate-y-2' : 'opacity-0 translate-y-0'
+          }`}
+        >
+          <h2 className="text-white text-2xl font-bold mb-4">{data.title}</h2>
+          
+          {/* Duration */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="flex items-center text-blue-200">
+              <Clock className="w-4 h-4 mr-2" />
+              <span className="font-medium">{data.duration}</span>
+            </div>
+          </div>
+
+          {/* Key Outcomes */}
+          <div className="space-y-2 mb-6">
+            <h4 className="text-blue-200 font-semibold text-sm mb-3">Key Outcomes:</h4>
+            {data.outcomes.slice(0, 3).map((outcome: string, idx: number) => (
+              <div key={idx} className="flex items-start text-left">
+                <CheckCircle className="w-4 h-4 mr-2 mt-0.5 text-green-400 flex-shrink-0" />
+                <span className="text-gray-200 text-sm">{outcome}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Learn More Button */}
+          <button className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 border border-white/30">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ProgramButton = ({ title, duration }: { title: string; duration: string }) => {
+  return (
+    <button className="relative inline-flex overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105">
+      <span
+        className="absolute inset-[-1000%] animate-spin"
+        style={{
+          background: 'conic-gradient(from 90deg at 50% 50%, #3B82F6 0%, #1D4ED8 50%, #3B82F6 100%)',
+          animation: 'spin 2s linear infinite'
+        }}
+      />
+      <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white px-6 py-3 text-blue-600 backdrop-blur-3xl font-bold text-center transition-colors duration-300 hover:text-blue-800">
+        <div>
+          <div className="text-base font-bold">{title}</div>
+          <div className="text-sm opacity-80">{duration}</div>
+        </div>
+      </span>
+    </button>
+  );
+};
+
+const CanvasRevealEffect = ({
+  animationSpeed = 0.4,
+  containerClassName,
+  colors = [[255, 255, 255]],
+  dotSize = 3
+}: {
+  animationSpeed?: number;
+  containerClassName?: string;
+  colors?: number[][];
+  dotSize?: number;
+}) => {
+  return (
+    <div className={`h-full relative bg-black ${containerClassName}`}>
+      <div className="h-full w-full">
+        {colors.map((color, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 opacity-50"
+            style={{
+              background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.8) 0%, transparent 50%)`,
+              animation: `pulse ${animationSpeed}s ease-in-out infinite alternate`,
+              animationDelay: `${index * 0.5}s`
+            }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/20 to-black/40" />
+      </div>
+    </div>
+  );
+};
+
+export const Icon = ({ className, ...rest }: any) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className={className}
+      {...rest}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
+    </svg>
+  );
+};
+
+export default function BusinessDevelopmentSite() {
+  const programsData = [
+    {
+      title: "Fundamentals in Business Development",
+      duration: "3 Months",
+      icon: "🎓",
+      outcomes: [
+        "Core business concepts",
+        "Market analysis skills", 
+        "Business strategy fundamentals",
+        "Customer relationship management"
+      ],
+      description: "Build a solid foundation in business development principles and practices.",
+      colors: [[59, 130, 246], [37, 99, 235]],
+      containerColor: "bg-blue-900"
+    },
+    {
+      title: "Corporate Ready Bootcamp",
+      duration: "6 Months", 
+      icon: "💼",
+      outcomes: [
+        "Corporate leadership skills",
+        "Project management expertise",
+        "Corporate strategy implementation",
+        "Team leadership and communication"
+      ],
+      description: "Prepare yourself for high-level corporate roles and leadership positions.",
+      colors: [[168, 85, 247], [147, 51, 234]],
+      containerColor: "bg-purple-900"
+    },
+    {
+      title: "Practical MBA (Mini-MBA)",
+      duration: "12 Months",
+      icon: "📈",
+      outcomes: [
+        "Comprehensive business knowledge",
+        "Strategic decision making",
+        "Advanced management skills",
+        "Financial analysis and planning"
+      ],
+      description: "Get MBA-level knowledge with practical, real-world applications.",
+      colors: [[34, 197, 94], [22, 163, 74]],
+      containerColor: "bg-emerald-900"
+    },
+    {
+      title: "Entrepreneurship Track", 
+      duration: "9 Months",
+      icon: "🚀",
+      outcomes: [
+        "Startup development skills",
+        "Business model creation",
+        "Venture funding knowledge",
+        "Innovation and disruption strategies"
+      ],
+      description: "Launch your entrepreneurial journey with comprehensive startup training.",
+      colors: [[249, 115, 22], [234, 88, 12]],
+      containerColor: "bg-orange-900"
+    },
+    {
+      title: "BXP",
+      duration: "6 Months",
+      icon: "🎯",
+      outcomes: [
+        "Business expansion strategies", 
+        "Market penetration techniques",
+        "Growth optimization skills",
+        "International business development"
+      ],
+      description: "Master business expansion and growth strategies for scaling companies.",
+      colors: [[239, 68, 68], [220, 38, 38]],
+      containerColor: "bg-red-900"
+    },
+    {
+      title: "EDGE-P",
+      duration: "4 Months",
+      icon: "⭐",
+      outcomes: [
+        "Professional development",
+        "Career advancement skills", 
+        "Industry-specific expertise",
+        "Leadership and executive presence"
+      ],
+      description: "Gain the professional edge needed for career advancement.",
+      colors: [[99, 102, 241], [79, 70, 229]],
+      containerColor: "bg-indigo-900"
+    }
+  ];
+
+  return (
+    <div className="bg-white pb-0 text-gray-900">
+      {/* Hero Section */}
+     
 
       {/* Animated Stats Section */}
       <AnimatedStats />
@@ -783,447 +1174,124 @@ export default function BusinessDevelopmentSite() {
               <span className="font-normal text-blue-600">Is Our Priority</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We provide comprehensive business development training with real-world applications and guaranteed career support.
+              We provide comprehensive business development and entrepreneurship training with real-world applications guaranteeing career enhancement.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyChooseUs.map((item, index) => (
-              <div key={index} className="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-blue-200 transition-all duration-300 hover:shadow-lg">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                  {item.icon}
+            {journeySteps.map((step, index) => (
+              <div key={index} className="bg-white border-2 border-blue-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full relative overflow-hidden group">
+                {/* Subtle background accent */}
+                <div className="absolute -top-8 -right-8 w-24 h-24 bg-blue-100 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300 z-0" />
+                {/* Icon and Title */}
+                <div className="relative z-10 flex flex-col items-start mb-4">
+                  <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-3 shadow-md">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-blue-900 mb-2">{step.name}</h3>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                {/* Description and Outcomes */}
+                <div className="relative z-10 flex-1 flex flex-col justify-center">
+                  <p className="text-gray-700 leading-relaxed mb-4 font-medium">{step.description}</p>
+                  <ul className="text-blue-700 text-sm space-y-1 mb-4 pl-4 list-disc">
+                    <li>Key Outcome 1 for {step.name}</li>
+                    <li>Key Outcome 2 for {step.name}</li>
+                    <li>Key Outcome 3 for {step.name}</li>
+                  </ul>
+                </div>
+                {/* Divider and Quote */}
+                <div className="relative z-10 mt-2 pt-2 border-t border-blue-100 w-full">
+                  <div className="text-xs text-blue-500 italic mt-2">"Every journey begins with a single step."</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Programs Offered Section */}
-      <section className="py-20 bg-gray-50 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-medium mb-6">
-              <BookOpen className="w-4 h-4 mr-2" />
+      {/* Animated Programs Offered Section - REPLACED */}
+      <div className="min-h-screen w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slower"></div>
+          <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-emerald-500/10 rounded-full blur-2xl animate-float"></div>
+        </div>
+
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        ></div>
+
+        <div className="relative z-10 py-20 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-white/20 text-white rounded-full text-sm font-medium mb-6 border border-white/30">
+              <Star className="w-4 h-4 mr-2" />
               Our Programs
             </div>
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6">
+            <h2 className="text-5xl md:text-6xl font-light text-white mb-6">
               Transform Your Career
               <br />
-              <span className="font-normal text-blue-600">With Our Programs</span>
+              <span className="font-normal text-blue-200">With Our Programs</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose from our comprehensive range of business development programs designed to accelerate your career growth.
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+              Choose from our comprehensive range of business development programs designed to accelerate your career growth
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Fundamentals in Business Development */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Fundamentals in Business Development</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>3 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Core business concepts</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Market analysis skills</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Business strategy fundamentals</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* Corporate Ready Bootcamp */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <Briefcase className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Corporate Ready Bootcamp</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>6 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Corporate leadership skills</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Project management expertise</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Corporate strategy implementation</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* Practical MBA */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <TrendingUp className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Practical MBA (Mini-MBA)</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>12 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Comprehensive business knowledge</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Strategic decision making</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Advanced management skills</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-            
-
-            {/* Entrepreneurship Track */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <Rocket className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Entrepreneurship Track</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>9 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Startup development skills</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Business model creation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Venture funding knowledge</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* BXP */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <Target className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">BXP</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>6 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Business expansion strategies</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Market penetration techniques</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Growth optimization skills</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* EDGE-P */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                <Star className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">EDGE-P</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>4 Months</span>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900">Key Outcomes:</h4>
-                  <ul className="text-gray-600 space-y-1">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Professional development</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Career advancement skills</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-4 h-4 mr-2 mt-1 text-blue-600" />
-                      <span>Industry-specific expertise</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {programsData.map((program, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <ProgramCard data={program} />
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+
+        <style jsx>{`
+          @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+          }
+          
+          @keyframes pulse-slower {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.08); }
+          }
+          
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+          }
+          
+          .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+          .animate-pulse-slower { animation: pulse-slower 6s ease-in-out infinite; }
+          .animate-float { animation: float 8s ease-in-out infinite; }
+        `}</style>
+      </div>
 
       <AdmissionsPage />
 
-
-      
-
-      {/* Contact Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="text-5xl md:text-6xl font-light text-white">
-            Ready to
-            <br />
-            <span className="font-normal">Transform Your Career?</span>
-          </h2>
-
-          <p className="text-xl font-light text-blue-100 max-w-2xl mx-auto">
-            Join thousands of successful professionals who have accelerated their careers with our programs.
-          </p>
-
-          <div className="flex justify-center gap-4 mb-8">
-            {socialLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.href}
-                className="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors border border-white/20"
-              >
-                <span className="text-white">{link.icon}</span>
-              </a>
-            ))}
-          </div>
-
-          <button className="bg-white text-blue-900 px-12 py-4 rounded-lg font-medium hover:bg-blue-50 transition-colors text-lg">
-            Apply Now
-          </button>
-        </div>
-      </section>
-
-      {/* Student Success Stories Section */}
-      <section className="py-20 bg-white px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-medium mb-6">
-              <Star className="w-4 h-4 mr-2" />
-              Success Stories
-            </div>
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6">
-              From Students to
-              <br />
-              <span className="font-normal text-blue-600">Industry Leaders</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our graduates have transformed their careers and achieved their professional goals.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Success Story 1 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
-                <img src="/success-story-1.jpg" alt="Success Story" className="w-full h-full object-cover" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <img src="/company-logo-1.png" alt="Company Logo" className="w-12 h-12 object-contain" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Sarah Johnson</h3>
-                    <p className="text-sm text-gray-600">Product Manager @ Google</p>
-                  </div>
-                </div>
-                <blockquote className="text-gray-700 italic">
-                  "The program transformed my career trajectory. From a junior developer to a Product Manager at Google in just 6 months."
-                </blockquote>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="font-medium">Before:</span>
-                  <span>Junior Developer</span>
-                  <ArrowRight className="w-4 h-4" />
-                  <span className="font-medium">After:</span>
-                  <span>Product Manager</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Success Story 2 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
-                <img src="/success-story-2.jpg" alt="Success Story" className="w-full h-full object-cover" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <img src="/company-logo-2.png" alt="Company Logo" className="w-12 h-12 object-contain" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Michael Chen</h3>
-                    <p className="text-sm text-gray-600">Founder @ TechStart</p>
-                  </div>
-                </div>
-                <blockquote className="text-gray-700 italic">
-                  "The entrepreneurship track gave me the tools and confidence to launch my own startup. We're now a team of 20+."
-                </blockquote>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="font-medium">Before:</span>
-                  <span>Software Engineer</span>
-                  <ArrowRight className="w-4 h-4" />
-                  <span className="font-medium">After:</span>
-                  <span>Founder & CEO</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Success Story 3 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
-                <img src="/success-story-3.jpg" alt="Success Story" className="w-full h-full object-cover" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <img src="/company-logo-3.png" alt="Company Logo" className="w-12 h-12 object-contain" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Emma Rodriguez</h3>
-                    <p className="text-sm text-gray-600">Business Development Lead @ Microsoft</p>
-                  </div>
-                </div>
-                <blockquote className="text-gray-700 italic">
-                  "The mentorship and practical experience I gained were invaluable. I now lead a team of 15 at Microsoft."
-                </blockquote>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="font-medium">Before:</span>
-                  <span>Sales Associate</span>
-                  <ArrowRight className="w-4 h-4" />
-                  <span className="font-medium">After:</span>
-                  <span>Business Development Lead</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hiring Partners Section */}
-      <section className="py-20 bg-gray-50 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-medium mb-6">
-              <Users className="w-4 h-4 mr-2" />
-              Our Partners
-            </div>
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6">
-              Trusted by
-              <br />
-              <span className="font-normal text-blue-600">Industry Leaders</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join our network of hiring partners who actively recruit our graduates.
-            </p>
-          </div>
-
-          {/* Company Logos Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-            {[1, 2, 3, 4, 5, 6].map((index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center">
-                <img src={`/company-${index}.png`} alt={`Company ${index}`} className="max-w-[120px] max-h-[60px] object-contain" />
-              </div>
-            ))}
-          </div>
-
-          {/* Testimonials */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <div className="flex items-center gap-4 mb-6">
-                <img src="/partner-1.jpg" alt="Partner" className="w-16 h-16 rounded-full object-cover" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">David Thompson</h3>
-                  <p className="text-sm text-gray-600">CTO @ TechCorp</p>
-                </div>
-              </div>
-              <blockquote className="text-gray-700 italic">
-                "The quality of graduates from this program is exceptional. They come in with practical experience and are ready to contribute from day one."
-              </blockquote>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <div className="flex items-center gap-4 mb-6">
-                <img src="/partner-2.jpg" alt="Partner" className="w-16 h-16 rounded-full object-cover" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">Lisa Chen</h3>
-                  <p className="text-sm text-gray-600">HR Director @ InnovateTech</p>
-                </div>
-              </div>
-              <blockquote className="text-gray-700 italic">
-                "We've hired multiple graduates from this program, and they've all exceeded our expectations. The curriculum really prepares them for real-world challenges."
-              </blockquote>
-            </div>
-          </div>
-        </div>
-        <div className='pt-10'>
-
-        </div>
-      </section>
+     
     </div>
   );
 }

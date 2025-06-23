@@ -218,10 +218,7 @@ export default function MacbookScrollDemo() {
   return (
     <div className="overflow-hidden bg-transparent w-full">
       <MacbookScroll
-        title={
-          <span>
-            TRANSFORMING STUDENTS INTO <br/> INDUSTRY PROFESSIONALS</span>
-        }
+      
         badge={
           <a href="https://peerlist.io/raghavkrishna">
             <Badge className="h-10 w-10 transform -rotate-12" />
