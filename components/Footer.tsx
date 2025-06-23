@@ -49,7 +49,7 @@ export default function Footer() {
                   className="rounded-lg"
                 />
                 <div className="text-xl font-bold">
-                  <span className="text-white">Kerala's #1 Practical Business School</span>
+                  <span className="text-white">Kerala&#39;s #1 Practical Business School</span>
       
                 </div>
               </div>

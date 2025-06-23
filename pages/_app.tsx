@@ -1,7 +1,11 @@
 import "@/styles/globals.css";
 import { Footer, Navbar } from "@/components";
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamically import Preloader to avoid SSR issues with gsap
+const Preloader = dynamic(() => import("@/components/Preloader"), { ssr: false });
 
 // Declare Chatbase types
 declare global {
@@ -29,6 +33,9 @@ export default function App({
 }) {
 	// Define the route where you don't want the footer
 	const hideFooterRoutes = ["/core"]; // Add more routes if needed
+
+	// Preloader state
+	const [loading, setLoading] = useState(true);
 
 	// Initialize Chatbase
 	useEffect(() => {
@@ -68,6 +75,10 @@ export default function App({
 			}
 		})();
 	}, []); // Empty dependency array means this runs once on mount
+
+	if (loading) {
+		return <Preloader onComplete={() => setLoading(false)} />;
+	}
 
 	return (
 		<div className="flex flex-col min-h-screen">

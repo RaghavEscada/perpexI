@@ -13,81 +13,82 @@ interface ITestimonial {
 
 
 const SuccessStoriesPage = () => {
-    const testimonials: ITestimonial[] = [
-        {
-            quote: "This program was a game-changer for my career. The hands-on projects and mentorship were invaluable.",
-            name: "Aisha Khan",
-            designation: "Software Engineer at TechCorp",
-            program: "Web Development",
-            industry: "Technology",
-            location: "San Francisco",
-            src: "/placeholder.jpg",
-        },
-        {
-            quote: "I was able to transition into a new industry thanks to the skills I gained here. Highly recommend!",
-            name: "Ben Carter",
-            designation: "Data Analyst at FinServe",
-            program: "Data Science",
-            industry: "Finance",
-            location: "New York",
-            src: "/placeholder.jpg",
-        },
-        {
-            quote: "The marketing course gave me the confidence to launch my own startup.",
-            name: "Chloe Davis",
-            designation: "Founder of MarketMinds",
-            program: "Digital Marketing",
-            industry: "Marketing",
-            location: "London",
-            src: "/placeholder.jpg",
-        },
-        {
-            quote: "An incredible learning experience with top-notch instructors.",
-            name: "David Rodriguez",
-            designation: "UX/UI Designer at CreativeCo",
-            program: "UX/UI Design",
-            industry: "Design",
-            location: "Austin",
-            src: "/placeholder.jpg",
-        },
-        {
-            quote: "The curriculum is very up-to-date and relevant to the current job market.",
-            name: "Eva Wilson",
-            designation: "Project Manager at BuildIt",
-            program: "Web Development",
-            industry: "Construction",
-            location: "Chicago",
-            src: "/placeholder.jpg",
-        },
-        {
-            quote: "I landed my dream job just a month after graduating. The career support is fantastic.",
-            name: "Frank Miller",
-            designation: "Software Engineer at Innovate LLC",
-            program: "Data Science",
-            industry: "Technology",
-            location: "Boston",
-            src: "/placeholder.jpg",
-        },
-    ];
+    // const testimonials: ITestimonial[] = [
+    //     {
+    //         quote: "This program was a game-changer for my career. The hands-on projects and mentorship were invaluable.",
+    //         name: "Aisha Khan",
+    //         designation: "Software Engineer at TechCorp",
+    //         program: "Web Development",
+    //         industry: "Technology",
+    //         location: "San Francisco",
+    //         src: "/placeholder.jpg",
+    //     },
+    //     {
+    //         quote: "I was able to transition into a new industry thanks to the skills I gained here. Highly recommend!",
+    //         name: "Ben Carter",
+    //         designation: "Data Analyst at FinServe",
+    //         program: "Data Science",
+    //         industry: "Finance",
+    //         location: "New York",
+    //         src: "/placeholder.jpg",
+    //     },
+    //     {
+    //         quote: "The marketing course gave me the confidence to launch my own startup.",
+    //         name: "Chloe Davis",
+    //         designation: "Founder of MarketMinds",
+    //         program: "Digital Marketing",
+    //         industry: "Marketing",
+    //         location: "London",
+    //         src: "/placeholder.jpg",
+    //     },
+    //     {
+    //         quote: "An incredible learning experience with top-notch instructors.",
+    //         name: "David Rodriguez",
+    //         designation: "UX/UI Designer at CreativeCo",
+    //         program: "UX/UI Design",
+    //         industry: "Design",
+    //         location: "Austin",
+    //         src: "/placeholder.jpg",
+    //     },
+    //     {
+    //         quote: "The curriculum is very up-to-date and relevant to the current job market.",
+    //         name: "Eva Wilson",
+    //         designation: "Project Manager at BuildIt",
+    //         program: "Web Development",
+    //         industry: "Construction",
+    //         location: "Chicago",
+    //         src: "/placeholder.jpg",
+    //     },
+    //     {
+    //         quote: "I landed my dream job just a month after graduating. The career support is fantastic.",
+    //         name: "Frank Miller",
+    //         designation: "Software Engineer at Innovate LLC",
+    //         program: "Data Science",
+    //         industry: "Technology",
+    //         location: "Boston",
+    //         src: "/placeholder.jpg",
+    //     },
+    // ];
 
     const [programFilter, setProgramFilter] = useState('All');
     const [industryFilter, setIndustryFilter] = useState('All');
     const [locationFilter, setLocationFilter] = useState('All');
 
-    const programs = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.program))], [testimonials]);
-    const industries = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.industry))], [testimonials]);
-    const locations = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.location))], [testimonials]);
+    // const programs = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.program))], [testimonials]);
+    // const industries = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.industry))], [testimonials]);
+    // const locations = useMemo(() => ['All', ...new Set(testimonials.map((t: ITestimonial) => t.location))], [testimonials]);
 
-    const filteredTestimonials = useMemo(() => {
-        return testimonials.filter((testimonial: ITestimonial) => {
-            const programMatch = programFilter === 'All' || testimonial.program === programFilter;
-            const industryMatch = industryFilter === 'All' || testimonial.industry === industryFilter;
-            const locationMatch = locationFilter === 'All' || testimonial.location === locationFilter;
-            return programMatch && industryMatch && locationMatch;
-        });
-    }, [testimonials, programFilter, industryFilter, locationFilter]);
+    // const filteredTestimonials = useMemo(() => {
+    //     return testimonials.filter((testimonial: ITestimonial) => {
+    //         const programMatch = programFilter === 'All' || testimonial.program === programFilter;
+    //         const industryMatch = industryFilter === 'All' || testimonial.industry === industryFilter;
+    //         const locationMatch = locationFilter === 'All' || testimonial.location === locationFilter;
+    //         return programMatch && industryMatch && locationMatch;
+    //     });
+    // }, [testimonials, programFilter, industryFilter, locationFilter]);
 
-
+    // The return statement is commented out for debugging or temporary removal.
+    /*
     return (
         <div className="bg-black text-white min-h-screen p-8">
             <header className="text-center mb-12">
@@ -158,6 +159,7 @@ const SuccessStoriesPage = () => {
             )}
         </div>
     );
+    */
 }
 
 export default SuccessStoriesPage; 

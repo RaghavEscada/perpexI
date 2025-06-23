@@ -417,7 +417,7 @@ const LogoMarquee = ({ logos, direction = "left", speed = 25 }: { logos: any[], 
                 <img
                   src={logo.url}
                   alt={`${logo.name} logo`}
-                  className="h-28 w-auto max-w-56 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="h-36 w-auto max-w-64 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
@@ -509,7 +509,7 @@ const Hero = () => {
                   <img 
                     src="/perpex.webp" 
                     alt="PerpeX Logo" 
-                    className="mx-auto h-32 md:h-36 lg:h-40 w-auto object-contain bg-transparent rounded-lg"
+                    className="mx-auto align-middle inline h-[1.1em] max-h-[1.2em] w-auto object-contain bg-transparent rounded-lg"
                   />
                 </span>
                 

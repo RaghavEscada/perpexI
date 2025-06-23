@@ -201,7 +201,7 @@ const timelineData = [
                             <div className="w-3 h-3 bg-blue-400 rounded-full mt-2 flex-shrink-0 shadow-sm shadow-blue-400/50"></div>
                             <div>
                                 <h4 className="font-bold text-white text-lg mb-2">Personal Vision</h4>
-                                <p className="text-gray-300 leading-relaxed">Clarifying your personal vision and long-term "why" to guide your journey.</p>
+                                <p className="text-gray-300 leading-relaxed">Clarifying your personal vision and long-term &quot;why&quot; to guide your journey.</p>
                             </div>
                         </div>
                     </div>
