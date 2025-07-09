@@ -22,41 +22,12 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
 
     const initializeAnimation = () => {
       const { gsap } = window;
-      const windowWidth = window.innerWidth;
-      const wrapperWidth = 180;
-      const finalPosition = windowWidth - wrapperWidth;
-      const stepDistance = finalPosition / 6;
-      const tl = gsap.timeline();
-
-      // Counter animation
-      tl.to(".count", {
-        x: -900,
-        duration: 0.85,
-        delay: 0.5,
-        ease: "power4.inOut",
-      });
-
-      for (let i = 1; i <= 6; i++) {
-        const xPosition = -900 + i * 180;
-        tl.to(".count", {
-          x: xPosition,
-          duration: 0.85,
-          ease: "power4.inOut",
-          onStart: () => {
-            gsap.to(".count-wrapper", {
-              x: stepDistance * i,
-              duration: 0.85,
-              ease: "power4.inOut",
-            });
-          },
-        });
-      }
 
       // Set initial state for reveal elements
       gsap.set(".revealer svg", { scale: 0 });
 
-      // Reveal animation
-      const delays = [6, 6.5, 7];
+      // Reveal animation with shorter delays
+      const delays = [0.5, 1, 1.5];
       document.querySelectorAll(".revealer svg").forEach((el, i) => {
         gsap.to(el, {
           scale: 45,
@@ -84,34 +55,8 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
   return (
     <div 
       ref={loaderRef}
-      className="fixed top-0 left-0 w-full h-full bg-black text-white flex items-end overflow-hidden z-50"
-      style={{ fontFamily: '"PP Editorial Old", serif' }}
+      className="fixed top-0 left-0 w-full h-full bg-black text-white flex items-center justify-center overflow-hidden z-50"
     >
-      {/* Counter Animation */}
-      <div className="relative w-45 h-90 overflow-hidden" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', willChange: 'transform' }}>
-        <div className="relative flex justify-between transform -translate-x-full" style={{ width: '1080px', height: '360px', transform: 'translateX(-1080px)', willChange: 'transform' }}>
-          {['9', '8', '7', '4', '2', '0'].map((digit, index) => (
-            <div key={index} className="relative" style={{ width: '180px', height: '360px' }}>
-              <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-light leading-none" style={{ fontSize: '360px' }}>
-                {digit}
-              </h1>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="relative w-45 h-90 overflow-hidden" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', willChange: 'transform' }}>
-        <div className="relative flex justify-between transform -translate-x-full" style={{ width: '1080px', height: '360px', transform: 'translateX(-1080px)', willChange: 'transform' }}>
-          {['9', '5', '9', '7', '4', '0'].map((digit, index) => (
-            <div key={index} className="relative" style={{ width: '180px', height: '360px' }}>
-              <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-light leading-none" style={{ fontSize: '360px' }}>
-                {digit}
-              </h1>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Reveal Stars */}
       <div className="revealer revealer-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <svg width="151" height="148" viewBox="0 0 151 148" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -191,7 +191,7 @@ const timelineData = [
                 <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl p-6">
                     <p className="text-xl font-semibold text-blue-300 mb-3">Foundation Building</p>
                     <p className="text-lg leading-relaxed text-gray-200">
-                        Build foundational awareness and mindset needed for entrepreneurship or consultancy.
+                        Build foundational awareness and mindset needed for entrepreneurship or business development.
                     </p>
                 </div>
 

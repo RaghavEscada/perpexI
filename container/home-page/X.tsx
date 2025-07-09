@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  GraduationCap, TrendingUp, Target, Building2, ArrowRight, Sparkles, Zap, Star
+  GraduationCap, TrendingUp, Target, Building2, ArrowRight, Star
 } from "lucide-react";
 
 const pillars = [
@@ -31,9 +31,10 @@ const pillars = [
     highlights: [
       "Client-centric sales funnels",
       "B2B sales strategies",
-      "Revenue optimization",
+      "Sales team monitoring",
       "Sales team training",
-      "Performance analytics"
+      "Performance analytics",
+      "Product, Process & Communication training"
     ],
     color: "blue",
     accent: "from-blue-400 to-indigo-600",
@@ -48,8 +49,8 @@ const pillars = [
     highlights: [
       "Lead generation systems",
       "Organic marketing strategies",
-      "Technology integration",
-      "Brand visibility enhancement",
+      "Meta, Google & SEO services",
+      "Video & content production",
       "Growth-focused campaigns"
     ],
     color: "purple",
@@ -63,11 +64,11 @@ const pillars = [
     description: "Talent placement hub",
     icon: Building2,
     highlights: [
+      "Job portal with 1000+ vacancies",
       "Campus-industry connections",
-      "Job matching algorithms",
+      "Talent pool",
       "Recruiter network access",
-      "Career guidance support",
-      "Placement success tracking"
+      "Career guidance support & Interview support"
     ],
     color: "orange",
     accent: "from-orange-400 to-red-500",
@@ -75,118 +76,217 @@ const pillars = [
   }
 ];
 
-const PillarCard = ({ pillar }: { pillar: any }) => {
-  const Icon = pillar.icon;
+const PatternBackground = ({ pattern }: { pattern: string }) => {
+  const patternMap = {
+    geometric: "bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.02)_1px,transparent_1px)]",
+    waves: "bg-[linear-gradient(45deg,transparent_49%,rgba(255,255,255,0.02)_50%,transparent_51%)]",
+    dots: "bg-[radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.02)_2px,transparent_2px)]",
+    hexagon: "bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.01),transparent)]"
+  };
+  
+  const backgroundSize = {
+    geometric: "40px 40px",
+    waves: "30px 30px", 
+    dots: "50px 50px",
+    hexagon: "60px 60px"
+  };
   
   return (
-    <div className="w-screen min-w-screen flex-shrink-0 h-full px-8 flex items-center justify-center relative">
-      {/* Content card - Much taller now */}
-      <div className="relative max-w-3xl w-full mx-auto ml-auto mr-12 h-[95vh] overflow-hidden">
-        {/* Main card with unique design */}
-        <div className="relative w-full h-full bg-black/40 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden">
+    <div 
+      className={`absolute inset-0 opacity-30 ${patternMap[pattern as keyof typeof patternMap] || patternMap.geometric}`}
+      style={{ backgroundSize: backgroundSize[pattern as keyof typeof backgroundSize] || backgroundSize.geometric }}
+    />
+  );
+};
+
+const FloatingElements = () => (
+  <div className="absolute inset-0 pointer-events-none">
+    <div 
+      className="absolute top-16 lg:top-20 right-16 lg:right-20 w-2 h-2 lg:w-3 lg:h-3 bg-white/20 rounded-full animate-bounce"
+      style={{ animationDelay: '0ms' }}
+    />
+    <div 
+      className="absolute bottom-24 lg:bottom-32 left-12 lg:left-16 w-1 h-1 lg:w-2 lg:h-2 bg-white/30 rounded-full animate-ping"
+      style={{ animationDelay: '1000ms' }}
+    />
+    <div className="absolute top-1/2 right-4 lg:right-8 w-0.5 h-4 lg:w-1 lg:h-8 bg-white/10 rounded-full" />
+  </div>
+);
+
+const StepIndicator = ({ currentStep, totalSteps, accent }: { currentStep: number, totalSteps: number, accent: string }) => (
+  <div className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 lg:space-x-4">
+    {Array.from({ length: totalSteps }, (_, i) => (
+      <div 
+        key={i} 
+        className={`transition-all duration-500 rounded-full ${
+          i === currentStep - 1 
+            ? `w-8 sm:w-12 lg:w-16 h-2 sm:h-3 lg:h-4 bg-gradient-to-r ${accent} shadow-lg` 
+            : 'w-2 sm:w-3 lg:w-4 h-2 sm:h-3 lg:h-4 bg-white/30 hover:bg-white/50'
+        }`}
+        aria-label={`Step ${i + 1}${i === currentStep - 1 ? ' (current)' : ''}`}
+      />
+    ))}
+  </div>
+);
+
+interface Pillar {
+  id: number;
+  highlights: any;
+  icon: React.ComponentType<any>;
+  title: string;
+  pattern: string;
+  accent: string;
+  number: string;
+  description: string;
+}
+
+const PillarCard = ({ pillar }: { pillar: Pillar }) => {
+  const Icon = pillar.icon;
+  
+  const handleExplore = () => {
+    console.log(`Exploring ${pillar.title}`);
+  };
+  
+  return (
+    <div className="w-screen min-w-screen flex-shrink-0 h-full px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
+      <div className="relative max-w-sm sm:max-w-md lg:max-w-2xl xl:max-w-3xl w-full mx-auto lg:ml-auto lg:mr-12 h-[85vh] sm:h-[90vh] lg:h-[95vh] overflow-hidden">
+        
+        {/* Main card with elegant design */}
+        <div className="relative w-full h-full bg-black/40 backdrop-blur-2xl rounded-2xl lg:rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden">
           
-          {/* Unique pattern overlay based on pillar */}
-          <div className="absolute inset-0 opacity-5">
-            {pillar.pattern === "geometric" && (
-              <div className="absolute inset-0" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`}}></div>
-            )}
-            {pillar.pattern === "waves" && (
-              <div className="absolute inset-0" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C17.108 2.271 14.924 3.258 13.661 4.02L8.04 6.73C1.373 10.568.22 11.423 0 12c.22.577 1.373 1.432 8.04 5.27l5.621 2.71c1.263.762 3.447 1.749 7.523 2.73h6.335c-2.064-.601-4.249-1.352-6.724-2.275L18.027 19.76C8.222 16.094 1.993 14.697 8.627 14.697c-10.562 0-15.888 1.278-25.371 4.972C16.64 19.347 22.647 20 33 20c10.271 0 15.362-1.222 24.629-4.928C66.884 14.434 81.317 14 93.375 14c5.898 0 6.875-.61 6.875-2 0-1.39-.977-2-6.875-2-12.058 0-26.491-.434-35.746 1.072C48.362 7.778 43.271 6 33 6 22.647 6 16.64.653 7.04 4.928 4.373 6.308 1.995 8.094 0 12c.22-.577 1.373-1.432 8.04-5.27l5.621-2.71C15.447 3.258 17.631 2.271 21.659 2.271h-6.335z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E")`}}></div>
-            )}
-            {pillar.pattern === "dots" && (
-              <div className="absolute inset-0" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`}}></div>
-            )}
-            {pillar.pattern === "hexagon" && (
-              <div className="absolute inset-0" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='28' height='49' viewBox='0 0 28 49' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 10.99-6.34V17.9L13.99 11.56 3 17.9z'/%3E%3C/g%3E%3C/svg%3E")`}}></div>
-            )}
-          </div>
+          {/* Pattern overlay */}
+          <PatternBackground pattern={pillar.pattern} />
           
-          {/* Animated glow border */}
-          <div className={`absolute inset-0 rounded-[2.5rem] bg-gradient-to-r ${pillar.accent} opacity-20 animate-pulse`}></div>
-          <div className={`absolute inset-[1px] rounded-[2.4rem] bg-gradient-to-br from-white/10 via-transparent to-black/20`}></div>
+          {/* Elegant glow border */}
+          <div className={`absolute inset-0 rounded-2xl lg:rounded-[2.5rem] bg-gradient-to-r ${pillar.accent} opacity-10`} />
+          <div className="absolute inset-[1px] rounded-2xl lg:rounded-[2.4rem] bg-gradient-to-br from-white/5 via-transparent to-black/10" />
           
-          {/* Top section with number and icon */}
-          <div className="relative z-10 p-12">
-            <div className="flex items-start justify-between mb-8">
+          {/* Header section */}
+          <header className="relative z-10 p-6 sm:p-8 lg:p-12">
+            <div className="flex items-start justify-between mb-6 lg:mb-8">
               {/* Large number */}
-              <div className={`text-8xl font-extralight bg-gradient-to-br ${pillar.accent} bg-clip-text text-transparent opacity-90`}>
+              <div className={`text-4xl sm:text-6xl lg:text-8xl font-extralight bg-gradient-to-br ${pillar.accent} bg-clip-text text-transparent opacity-90`}>
                 {pillar.number}
               </div>
               
-              {/* Icon with unique background */}
-              <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${pillar.accent} p-0.5`}>
-                <div className="w-full h-full bg-black/60 backdrop-blur-xl rounded-2xl flex items-center justify-center">
-                  <Icon className="w-10 h-10 text-white" />
+              {/* Icon with elegant background */}
+              <div className={`relative w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl lg:rounded-2xl bg-gradient-to-br ${pillar.accent} p-0.5`}>
+                <div className="w-full h-full bg-black/60 backdrop-blur-xl rounded-xl lg:rounded-2xl flex items-center justify-center">
+                  <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                  <Star className={`w-3 h-3 text-${pillar.color}-500`} />
+                <div className="absolute -top-1 -right-1 lg:-top-2 lg:-right-2 w-4 h-4 lg:w-6 lg:h-6 bg-white rounded-full flex items-center justify-center">
+                  <Star className="w-2 h-2 lg:w-3 lg:h-3 text-yellow-500" />
                 </div>
               </div>
             </div>
             
             {/* Title and description */}
-            <div className="mb-10">
-              <h2 className="text-6xl font-extralight text-white mb-4 tracking-tight leading-none">{pillar.title}</h2>
-              <p className="text-2xl font-light text-white/70 leading-relaxed">{pillar.description}</p>
+            <div className="mb-6 lg:mb-10">
+              <h2 className="text-2xl sm:text-4xl lg:text-6xl font-extralight text-white mb-2 lg:mb-4 tracking-tight leading-tight">
+                {pillar.title}
+              </h2>
+              <p className="text-base sm:text-lg lg:text-2xl font-light text-white/70 leading-relaxed">
+                {pillar.description}
+              </p>
             </div>
             
-            {/* Unique separator with animation */}
-            <div className="relative mb-12">
-              <div className={`w-32 h-1 bg-gradient-to-r ${pillar.accent} rounded-full`}></div>
-              <div className={`absolute top-0 left-0 w-8 h-1 bg-white rounded-full animate-pulse`}></div>
+            {/* Elegant separator */}
+            <div className="relative mb-6 lg:mb-12">
+              <div className={`w-16 sm:w-24 lg:w-32 h-0.5 lg:h-1 bg-gradient-to-r ${pillar.accent} rounded-full`} />
+              <div className="absolute top-0 left-0 w-4 sm:w-6 lg:w-8 h-0.5 lg:h-1 bg-white rounded-full animate-pulse" />
             </div>
-          </div>
+          </header>
           
-          {/* Middle section - highlights with enhanced design */}
-          <div className="relative z-10 px-12 pb-8 flex-1">
-            <div className="space-y-6">
-              {pillar.highlights.map((highlight: string, idx: number) => (
-                <div key={idx} className="group flex items-start hover:translate-x-3 transition-all duration-300">
-                  <div className="relative mr-6 mt-2">
-                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${pillar.accent} shadow-lg group-hover:scale-125 transition-transform duration-300`}></div>
-                    <div className={`absolute inset-0 w-4 h-4 rounded-full bg-gradient-to-br ${pillar.accent} blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300`}></div>
+          {/* Highlights section */}
+          <div className="relative z-10 px-6 sm:px-8 lg:px-12 pb-4 lg:pb-8 flex-1">
+            <ul className="space-y-3 sm:space-y-4 lg:space-y-6">
+              {pillar.highlights.map((highlight: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | Iterable<React.ReactNode> | null | undefined, idx: React.Key | null | undefined) => (
+                <li key={idx} className="group flex items-start hover:translate-x-1 lg:hover:translate-x-3 transition-all duration-300">
+                  <div className="relative mr-3 sm:mr-4 lg:mr-6 mt-1 lg:mt-2">
+                    <div className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-full bg-gradient-to-br ${pillar.accent} shadow-lg group-hover:scale-125 transition-transform duration-300`} />
+                    <div className={`absolute inset-0 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-full bg-gradient-to-br ${pillar.accent} blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300`} />
                   </div>
-                  <p className="text-white/80 text-xl font-light leading-relaxed group-hover:text-white transition-colors duration-300 flex-1">{highlight}</p>
-                </div>
+                  <span className="text-white/80 text-sm sm:text-base lg:text-xl font-light leading-relaxed group-hover:text-white transition-colors duration-300 flex-1">
+                    {highlight}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
           
-          {/* Bottom section - enhanced CTA */}
-          <div className="relative z-10 p-12 pt-8">
-            <button className={`w-full py-6 px-8 rounded-2xl bg-gradient-to-r ${pillar.accent} hover:shadow-2xl hover:shadow-${pillar.color}-500/25 text-white transition-all duration-500 font-medium text-lg flex items-center justify-center group relative overflow-hidden transform hover:scale-[1.02] active:scale-[0.98]`}>
+          {/* CTA section */}
+          <footer className="relative z-10 p-6 sm:p-8 lg:p-12 pt-4 lg:pt-8">
+            <button 
+              onClick={handleExplore}
+              className={`w-full py-3 sm:py-4 lg:py-6 px-4 sm:px-6 lg:px-8 rounded-xl lg:rounded-2xl bg-gradient-to-r ${pillar.accent} hover:shadow-2xl text-white transition-all duration-500 font-medium text-sm sm:text-base lg:text-lg flex items-center justify-center group relative overflow-hidden transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black/50`}
+              aria-label={`Explore ${pillar.title} in detail`}
+            >
               {/* Button background animation */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
-              <span className="relative z-10 mr-4">Explore {pillar.title}</span>
-              <ArrowRight className="relative z-10 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-              <Zap className="relative z-10 w-5 h-5 ml-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:animate-pulse" />
+              <span className="relative z-10 mr-2 lg:mr-4">Explore {pillar.title}</span>
+              <ArrowRight className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:translate-x-1 lg:group-hover:translate-x-2 transition-transform duration-300" />
             </button>
-          </div>
+          </footer>
           
-          {/* Floating elements for uniqueness */}
-          <div className="absolute top-20 right-20 w-3 h-3 bg-white/20 rounded-full animate-bounce"></div>
-          <div className="absolute bottom-32 left-16 w-2 h-2 bg-white/30 rounded-full animate-ping"></div>
-          <div className="absolute top-1/2 right-8 w-1 h-8 bg-white/10 rounded-full"></div>
+          {/* Floating elements */}
+          <FloatingElements />
         </div>
       </div>
       
-      {/* Enhanced step indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-4">
-        {pillars.map((_, i) => (
-          <div 
-            key={i} 
-            className={`transition-all duration-500 rounded-full ${
-              i === pillar.id - 1 
-                ? `w-16 h-4 bg-gradient-to-r ${pillar.accent} shadow-lg` 
-                : 'w-4 h-4 bg-white/30 hover:bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
+      {/* Step indicator */}
+      <StepIndicator currentStep={pillar.id} totalSteps={pillars.length} accent={pillar.accent} />
     </div>
   );
 };
+
+const BackgroundElements = () => (
+  <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <div 
+      className="absolute top-1/4 left-1/4 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-emerald-500/5 rounded-full blur-3xl animate-pulse"
+      style={{ animationDelay: '0ms' }}
+    />
+    <div 
+      className="absolute bottom-1/4 right-1/4 w-56 sm:w-72 lg:w-80 h-56 sm:h-72 lg:h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse"
+      style={{ animationDelay: '1000ms' }}
+    />
+    <div 
+      className="absolute top-1/2 right-1/2 w-48 sm:w-56 lg:w-64 h-48 sm:h-56 lg:h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
+      style={{ animationDelay: '500ms' }}
+    />
+    <div 
+      className="absolute top-3/4 left-1/3 w-52 sm:w-64 lg:w-72 h-52 sm:h-64 lg:h-72 bg-orange-500/5 rounded-full blur-3xl animate-pulse"
+      style={{ animationDelay: '1500ms' }}
+    />
+  </div>
+);
+
+const ProgressBar = ({ progressWidth }: { progressWidth: string }) => (
+  <div className="sticky top-4 lg:top-6 left-0 w-full z-50 px-6 sm:px-8 lg:px-12">
+    <div className="h-1 lg:h-1.5 bg-white/10 rounded-full backdrop-blur-sm shadow-lg border border-white/5">
+      <motion.div 
+        className="h-full bg-gradient-to-r from-emerald-400 via-blue-400 via-purple-400 to-orange-400 rounded-full shadow-lg"
+        style={{ width: progressWidth }}
+      />
+    </div>
+  </div>
+);
+
+const IntroSection = () => (
+  <div className="absolute left-4 sm:left-8 lg:left-12 px-4 sm:px-8 lg:px-12 top-1/2 transform -translate-y-1/2 text-white max-w-xs sm:max-w-md lg:max-w-xl z-0 pointer-events-none">
+    <p className="text-lg sm:text-xl lg:text-2xl mb-2 lg:mb-4 font-light">What is Perpex?</p>
+    <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extralight leading-tight tracking-tight">
+      The Four-Pillar
+      <br />
+      <span className="bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+        Ecosystem
+      </span>
+    </h1>
+    <p className="text-sm sm:text-lg lg:text-xl font-light text-slate-400 mt-3 lg:mt-6 max-w-xs sm:max-w-sm lg:max-w-md leading-relaxed">
+      An integrated approach designed to transform potential into professional excellence
+    </p>
+  </div>
+);
 
 export default function PerpeXPillarsScroll() {
   const targetRef = useRef(null);
@@ -195,53 +295,31 @@ export default function PerpeXPillarsScroll() {
     offset: ["start start", "end start"]
   });
   
-  // Adjusted for 4 pillars instead of 8
-  const x = useTransform(scrollYProgress, [0, 0.9], ["0%", `-${(pillars.length - 1) * 100}%`]);  
-  const progressWidth = useTransform(scrollYProgress, [0, 0.9], ["0%", "100%"]);
+  const transformValues = useMemo(() => ({
+    x: useTransform(scrollYProgress, [0, 0.9], ["0%", `-${(pillars.length - 1) * 100}%`]),
+    progressWidth: useTransform(scrollYProgress, [0, 0.9], ["0%", "100%"])
+  }), [scrollYProgress]);
   
   return (
     <section 
       ref={targetRef} 
       className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-black"
-      style={{ height: `${800}vh` }}
+      style={{ height: `${600}vh` }}
+      aria-label="PerpeX Four-Pillar Ecosystem"
     >
-      {/* Enhanced floating background elements */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 right-1/2 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
-        <div className="absolute top-3/4 left-1/3 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl animate-pulse delay-1500"></div>
-      </div>
-      
-      {/* Enhanced Progress bar */}
-      <div className="sticky top-6 left-0 w-full z-50 px-12">
-        <div className="h-1.5 bg-white/10 rounded-full backdrop-blur-sm shadow-lg border border-white/5">
-          <motion.div 
-            className="h-full bg-gradient-to-r from-emerald-400 via-blue-400 via-purple-400 to-orange-400 rounded-full shadow-lg"
-            style={{ width: progressWidth }}
-          />
-        </div>
-      </div>
+      {/* Background elements */}
+      <BackgroundElements />
+      {/* Progress bar */}
+      <ProgressBar progressWidth={transformValues.progressWidth.get()} />
       
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-start">
-        {/* Background heading text - EXACTLY like original */}
-        <div className="absolute left-12 px-12 top-1/2 transform -translate-y-1/2 text-white max-w-xl z-0 pointer-events-none">
-          <h1 className="text-7xl font-extralight leading-tight tracking-tight">
-            Four-Pillar
-            <br />
-            <span className="flex font-light bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-              Ecosystem
-            </span>
-          </h1>
-          <p className="text-xl font-light text-slate-400 mt-6 max-w-md leading-relaxed">
-            An integrated approach designed to transform potential into professional excellence
-          </p>
-        </div>
+        {/* Intro section */}
+        <IntroSection />
         
         {/* Horizontal carousel */}
         <motion.div
-          style={{ x }}
-          className="flex flex-nowrap h-screen pt-4 pb-0 w-full"
+          style={{ x: transformValues.x }}
+          className="flex flex-nowrap h-screen pt-2 lg:pt-4 pb-0 w-full"
         >
           {pillars.map((pillar) => (
             <PillarCard 

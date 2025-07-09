@@ -65,7 +65,7 @@ export default function Footer() {
             </div>
             
             <p className="text-gray-400 text-sm max-w-sm">
-              Delivering perpetual excellence in data analytics and business intelligence solutions.
+              Delivering perpetual excellence.
             </p>
 
             {/* Contact Info - Compact */}
@@ -88,13 +88,17 @@ export default function Footer() {
                   97451 00046
                 </a>
               </div>
-              
-              <div>
-                <span className="text-gray-300">📧 </span>
-                <a href="mailto:info@perpex.in" className="text-blue-400 hover:text-blue-300">
-                  info@perpex.in
+
+              <div className="text-xs space-y-1">
+                <a href="mailto:Support@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
+                  Support@perpexbschool.in
+                </a>
+                <a href="mailto:Admissions@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
+                  Admissions@perpexbschool.in
                 </a>
               </div>
+              
+             
 
               <div>
                 <span className="text-gray-300">📍 </span>
@@ -107,14 +111,15 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div className="text-xs space-y-1">
-                <a href="mailto:Support@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
-                  Support@perpexbschool.in
-                </a>
-                <a href="mailto:Admissions@perpexbschool.in" className="text-blue-400 hover:text-blue-300 block">
-                  Admissions@perpexbschool.in
+              <div>
+                <span className="text-gray-300">📧 </span>
+                <h1>For B2B Enquiries: </h1>
+                <a href="mailto:info@perpex.in" className="text-blue-400 hover:text-blue-300">
+                  info@perpex.in
                 </a>
               </div>
+
+              
             </div>
 
             {/* Social Icons - Compact */}

@@ -171,16 +171,6 @@ const perpeXTestimonials = [
   }
 ];
 
-// Combine all testimonials
-const testimonials = [...placeXTestimonials, ...perpeXTestimonials];
-
-// Create different rows for each column with proper distribution
-const firstRow = testimonials.slice(0, 4);
-const secondRow = testimonials.slice(4, 7);
-const thirdRow = testimonials.slice(7, 11);
-const fourthRow = testimonials.slice(11, 14);
-const fifthRow = testimonials.slice(14, 18);
-
 interface MarqueeProps {
   className?: string;
   reverse?: boolean;
@@ -283,7 +273,7 @@ const ReviewCard = ({
             ? "bg-orange-500/20 text-orange-300" 
             : "bg-blue-500/20 text-blue-300"
         )}>
-          {type === "consulting" ? "Consulting" : "Placement"}
+          {type === "consulting" ? "Consulting" : "B2B Placement"}
         </div>
       </div>
       <blockquote className="text-sm text-white/90 leading-relaxed md:text-base">
@@ -293,83 +283,146 @@ const ReviewCard = ({
   );
 };
 
+// Create different rows for each column with proper distribution
+const consultingFirstRow = perpeXTestimonials.slice(0, 2);
+const consultingSecondRow = perpeXTestimonials.slice(2, 4);
+const consultingThirdRow = perpeXTestimonials.slice(4, 6);
+
+const placementFirstRow = placeXTestimonials.slice(0, 4);
+const placementSecondRow = placeXTestimonials.slice(4, 8);
+const placementThirdRow = placeXTestimonials.slice(8, 12);
+
 const Testimonial = () => {
   return (
-    <div className="py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
-      <div className="mx-auto mb-20 max-w-5xl text-center">
-        <h1 className="mb-8 text-4xl font-light text-white md:text-6xl lg:text-7xl">
+    <div className="py-12 md:py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
+      <div className="mx-auto mb-12 md:mb-20 max-w-5xl text-center px-4">
+        <h1 className="mb-6 md:mb-8 text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-light text-white">
           Trusted by{" "}
-          <span className="text-blue-500">
+          <span className="text-blue-400">
             Professionals
           </span>{" "}
           and{" "}
-          <span className="text-blue-400">
+          <span className="text-orange-400">
             Organizations
           </span>
         </h1>
-        <p className="text-lg text-gray-300 md:text-xl lg:text-2xl">
+        <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-300">
           From career placements to business consulting, discover how PlaceX and PerpeX
           have transformed careers and accelerated business growth across industries.
         </p>
       </div>
 
-      <div className="relative flex h-[900px] w-full flex-row items-center justify-center overflow-hidden rounded-lg px-4">
-        {/* Column 1 - Moving Down */}
-        <Marquee pauseOnHover vertical className="[--duration:25s]">
-          {firstRow.map((review) => (
-            <ReviewCard key={`first-${review.name}`} {...review} />
-          ))}
-        </Marquee>
-        
-        {/* Column 2 - Always visible - Moving Up */}
-        <Marquee
-          reverse
-          pauseOnHover
-          vertical
-          className="[--duration:30s]"
-        >
-          {secondRow.map((review) => (
-            <ReviewCard key={`second-${review.name}`} {...review} />
-          ))}
-        </Marquee>
-        
-        {/* Column 3 - Visible on tiny screens+ - Moving Down */}
-        <Marquee
-          pauseOnHover
-          vertical
-          className="[--duration:35s]"
-        >
-          {thirdRow.map((review) => (
-            <ReviewCard key={`third-${review.name}`} {...review} />
-          ))}
-        </Marquee>
-        
-        {/* Column 4 - Moving Up */}
-        <Marquee
-          reverse
-          pauseOnHover
-          vertical
-          className="[--duration:40s]"
-        >
-          {fourthRow.map((review) => (
-            <ReviewCard key={`fourth-${review.name}`} {...review} />
-          ))}
-        </Marquee>
-        
-        {/* Column 5 - Moving Down */}
-        <Marquee
-          pauseOnHover
-          vertical
-          className="[--duration:45s]"
-        >
-          {fifthRow.map((review) => (
-            <ReviewCard key={`fifth-${review.name}`} {...review} />
-          ))}
-        </Marquee>
-        
-        {/* Gradient overlays */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-gray-900"></div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-gray-900"></div>
+      <div className="flex flex-col lg:flex-row w-full gap-8 px-4">
+        {/* Consulting Section */}
+        <div className="flex-1">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-orange-400 mb-2">
+              Consulting Excellence
+            </h2>
+            <p className="text-gray-300 text-sm md:text-base">
+              PerpeX transforming businesses
+            </p>
+          </div>
+          
+          <div className="relative flex h-[500px] md:h-[700px] w-full flex-row items-center justify-center overflow-hidden rounded-lg">
+            {/* Column 1 - Moving Down */}
+            <Marquee pauseOnHover vertical className="[--duration:25s]">
+              {consultingFirstRow.map((review, index) => (
+                <ReviewCard key={`consulting-first-${index}`} {...review} />
+              ))}
+            </Marquee>
+            
+            {/* Column 2 - Moving Up */}
+            <Marquee
+              reverse
+              pauseOnHover
+              vertical
+              className="[--duration:30s]"
+            >
+              {consultingSecondRow.map((review, index) => (
+                <ReviewCard key={`consulting-second-${index}`} {...review} />
+              ))}
+            </Marquee>
+            
+            {/* Column 3 - Moving Down - Hidden on mobile */}
+            <div className="hidden md:block">
+              <Marquee
+                pauseOnHover
+                vertical
+                className="[--duration:35s]"
+              >
+                {consultingThirdRow.map((review, index) => (
+                  <ReviewCard key={`consulting-third-${index}`} {...review} />
+                ))}
+              </Marquee>
+            </div>
+            
+            {/* Gradient overlays */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-gray-900"></div>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-gray-900"></div>
+          </div>
+        </div>
+
+        {/* Vertical Divider - Hidden on mobile */}
+        <div className="relative hidden lg:flex flex-col items-center">
+          <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-30"></div>
+          <div className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-gray-400 rounded-full opacity-50"></div>
+        </div>
+
+        {/* Placement Section */}
+        <div className="flex-1">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-blue-400 mb-2">
+              B2B Placement Success
+            </h2>
+            <p className="text-gray-300 text-sm md:text-base">
+              PlaceX connecting talent with opportunities
+            </p>
+          </div>
+          
+          <div className="relative flex h-[500px] md:h-[700px] w-full flex-row items-center justify-center overflow-hidden rounded-lg">
+            {/* Column 1 - Moving Up */}
+            <Marquee
+              reverse
+              pauseOnHover
+              vertical
+              className="[--duration:40s]"
+            >
+              {placementFirstRow.map((review, index) => (
+                <ReviewCard key={`placement-first-${index}`} {...review} />
+              ))}
+            </Marquee>
+            
+            {/* Column 2 - Moving Down */}
+            <Marquee
+              pauseOnHover
+              vertical
+              className="[--duration:45s]"
+            >
+              {placementSecondRow.map((review, index) => (
+                <ReviewCard key={`placement-second-${index}`} {...review} />
+              ))}
+            </Marquee>
+
+            {/* Column 3 - Moving Up - Hidden on mobile */}
+            <div className="hidden md:block">
+              <Marquee
+                reverse
+                pauseOnHover
+                vertical
+                className="[--duration:50s]"
+              >
+                {placementThirdRow.map((review, index) => (
+                  <ReviewCard key={`placement-third-${index}`} {...review} />
+                ))}
+              </Marquee>
+            </div>
+            
+            {/* Gradient overlays */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-gray-900"></div>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-gray-900"></div>
+          </div>
+        </div>
       </div>
     </div>
   );

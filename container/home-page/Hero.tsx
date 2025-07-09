@@ -319,7 +319,7 @@ export function ContainerTextFlip({
     <div className="relative inline-block">
       <span
         className={cn(
-          "inline-block text-2xl md:text-4xl lg:text-5xl font-bold transition-all duration-500",
+          "inline-block text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold transition-all duration-500",
           "bg-gradient-to-r from-blue-200 via-white to-blue-200 bg-clip-text text-transparent",
           "drop-shadow-lg",
           isAnimating ? "opacity-0 transform translate-y-4 scale-95" : "opacity-100 transform translate-y-0 scale-100",
@@ -492,20 +492,20 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 min-h-screen flex flex-col pt-8">
-        {/* Main Content Section - Pulled up by reducing top padding */}
-        <div className="flex-1 flex flex-col justify-center px-6 md:px-12 py-4 pt-12">
-          <div className="max-w-5xl mx-auto text-center space-y-6">
+      <div className="relative z-20 min-h-screen flex flex-col">
+        {/* First Viewport - Hero Content */}
+        <div className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-8">
+          <div className="max-w-6xl mx-auto text-center space-y-8 flex-grow flex flex-col justify-center">
             
-            {/* Enhanced Main Heading */}
-            <div className="space-y-4 ">
+            {/* Enhanced Main Heading - Enlarged */}
+            <div className="space-y-8">
               <h1 
-                className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight transition-all duration-800 ${
+                className={`text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white tracking-tight leading-tight transition-all duration-800 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: "200ms" }}
               >
-                <span className="block font-bold">
+                <span className="block pt-12 font-bold">
                   <img 
                     src="/perpex.webp" 
                     alt="PerpeX Logo" 
@@ -514,7 +514,7 @@ const Hero = () => {
                 </span>
                 
                 <span
-                  className={`block text-xl md:text-3xl lg:text-4xl mt-3 font-normal text-white/80 transition-all duration-600 ${
+                  className={`block text-2xl md:text-4xl lg:text-5xl xl:text-6xl mt-6 font-normal text-white/80 transition-all duration-600 ${
                     isVisible ? "opacity-100" : "opacity-0"
                   }`}
                   style={{ transitionDelay: "400ms" }}
@@ -523,7 +523,7 @@ const Hero = () => {
                 </span>
                 
                 <div
-                  className={`mt-4 transition-all duration-600 ${
+                  className={`mt-8 transition-all duration-600 ${
                     isVisible ? "opacity-100" : "opacity-0"
                   }`}
                   style={{ transitionDelay: "600ms" }}
@@ -537,30 +537,33 @@ const Hero = () => {
               </h1>
             </div>
 
-            {/* Enhanced Description */}
+            {/* Enhanced Description - Enlarged */}
             <div 
-              className={`space-y-2 max-w-3xl mx-auto transition-all duration-600 ${
+              className={`space-y-4 max-w-4xl mx-auto transition-all duration-600 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
               style={{ transitionDelay: "800ms" }}
             >
-              <p className="text-lg text-slate-400 font-medium">
+              <p className="text-xl md:text-2xl lg:text-3xl text-slate-400 font-medium">
                 Bridging youth unemployment with industry-aligned practical training
               </p>
-              <p className="text-lg text-white">
+              <p className="text-xl md:text-2xl lg:text-3xl text-white">
                 End to End BD Training, Entrepreneurship Readiness, and Guaranteed Results
               </p>
             </div>
 
-            {/* Enhanced CTAs */}
+            {/* Spacer to push buttons to bottom */}
+            <div className="flex-grow"></div>
+
+            {/* Enhanced CTAs - Positioned at bottom of viewport */}
             <div 
-              className={`flex flex-row gap-4 justify-center pt-6 transition-all duration-600 ${
+              className={`flex flex-row gap-6 justify-center pb-12 transition-all duration-600 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
               style={{ transitionDelay: "1000ms" }}
             >
               <button 
-                className="group relative px-8 py-3 bg-white text-blue-900 font-semibold rounded-lg overflow-hidden shadow-xl hover:scale-105 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transition-all duration-300"
+                className="group relative px-10 py-4 bg-white text-blue-900 font-semibold text-lg rounded-lg overflow-hidden shadow-xl hover:scale-105 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transition-all duration-300"
               >
                 <div 
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -569,76 +572,55 @@ const Hero = () => {
                 <span className="relative z-10 flex items-center">
                   Enroll Now
                   <div className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </div>
                 </span>
               </button>
 
               <button 
-                className="px-8 py-3 border border-white/30 text-white rounded-lg backdrop-blur-sm hover:bg-white/10 hover:border-white/50 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 transition-all duration-300"
+                className="px-10 py-4 border border-white/30 text-white text-lg rounded-lg backdrop-blur-sm hover:bg-white/10 hover:border-white/50 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 transition-all duration-300"
               >
                 <span className="flex items-center">
-                  <Play className="mr-2 w-4 h-4" />
+                  <Play className="mr-2 w-5 h-5" />
                  Download Brochure
                 </span>
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Logo Marquees - Now part of main content */}
+        {/* Second Section - Logo Marquees */}
+        <div 
+          className={`py-16 space-y-4 transition-all duration-800 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ transitionDelay: "1200ms" }}
+        >
+          <p className="text-center text-lg text-white/70 font-medium mb-8">
+            Our Client Collaboration Network Includes
+          </p>
+          
+          {/* First Marquee */}
           <div 
-            className={`mt-6 pb-6 space-y-1 transition-all duration-800 ${
-              isVisible ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ transitionDelay: "1200ms" }}
+            className="relative overflow-hidden py-2"
+            style={{
+              maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            }}
           >
-            <p className="text-center text-sm text-white/70 font-medium mb-4">
-              Our Client Collaboration Network Includes
-            </p>
-            
-            {/* First Marquee */}
-            <div 
-              className="relative overflow-hidden py-1"
-              style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-              }}
-            >
-              <LogoMarquee logos={logos1} direction="left" speed={25} />
-            </div>
-            
-            {/* Second Marquee */}
-            <div 
-              className="relative overflow-hidden py-1"
-              style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-              }}
-            >
-              <LogoMarquee logos={logos2} direction="right" speed={27} />
-            </div>
+            <LogoMarquee logos={logos1} direction="left" speed={25} />
           </div>
-
-            {/* MacBook Component - Enhanced with white background */}
+          
+          {/* Second Marquee */}
           <div 
-            className={`mt-1 mb-16 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-            style={{ transitionDelay: "1400ms" }}
+            className="relative overflow-hidden py-2"
+            style={{
+              maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            }}
           >
-            <div className="bg-white rounded-3xl shadow-2xl shadow-black/20   mx-auto max-w-[90vw] p-12 md:p-16 lg:p-24">
-              <div className="text-center mb-1">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                  Built on Success, Backed by Results.
-                </h2>
-                <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                  See how our comprehensive training system transforms students into industry-ready professionals
-                </p>
-              </div>
-              <div className="transform scale-150 md:scale-[2] lg:scale-[2.5] xl:scale-[3] origin-center">
-                <MacbookScrollDemo />
-              </div>
-            </div>
+            <LogoMarquee logos={logos2} direction="right" speed={27} />
           </div>
         </div>
+
       </div>
       
       <style jsx>{`

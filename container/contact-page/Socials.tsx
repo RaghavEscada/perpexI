@@ -8,7 +8,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 
 export default function Socials() {
 	const [rotate, setRotate] = useState(0);
-	const phrase = ["SMMA", "Web Development", "Brand Identity", "Content Strategy"];
+	const phrase = ["BD Training", "Entrepreneurship", "Placement Support", "Career Success"];
 	useEffect(() => {
 		window.addEventListener("mousemove", (e) => {
 			let mouseX = e.clientX;
@@ -43,15 +43,20 @@ export default function Socials() {
 					<div className="w-full flex sm:flex-col xm:flex-col justify-between gap-y-[20px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
 							<h3 className="paragraph font-medium text-white font-NeueMontreal">
-								Our contact
+								Get in Touch
 							</h3>
 						</div>
 						<div className="w-[50%] text-white sm:w-full xm:w-full flex sm:flex-col xm:flex-col justify-between gap-y-[20px]">
 							<div>
 								<h1 className="paragraph font-medium font-NeueMontreal text-white pb-[20px]">
-									Studio:
+									Campus Address:
 								</h1>
 								<div className="flex flex-col gap-y-[10px]">
+									<LinkHover
+										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+										title={`PerpeX Business School,`}
+										href="/"
+									/>
 									<LinkHover
 										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
 										title={`No.01, 3rd Street,`}
@@ -64,12 +69,7 @@ export default function Socials() {
 									/>
 									<LinkHover
 										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Anakaputhur,"
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Chennai-6000070."
+										title="Anakaputhur, Chennai-600070."
 										href="/"
 									/>
 								</div>
@@ -77,9 +77,9 @@ export default function Socials() {
 							<div className="flex w-fit h-fit gap-x-[5px] group">
 								<div className="rounded-[50px] border-[2px] border-[#21212155] group-hover:bg-red-600 py-[3px] px-[12px] cursor-pointer">
 								<h1 className="paragraph  font-NeueMontreal text-white font-bold">
-							Contact Number : 
+							Admissions Hotline : 
   <a 
-    href="https://wa.me/919789985132?text=Dear%20Nuke%20Marketing%20Team%2C%20I%20hope%20you%20are%20doing%20well.%20I%20am%20interested%20in%20learning%20more%20about%20your%20services%20and%20ongoing%20projects.%20Could%20you%20please%20provide%20more%20details%20or%20let%20me%20know%20a%20suitable%20time%20to%20discuss%20further%3F%20Looking%20forward%20to%20your%20response.%20Best%20regards%2C%20Client" 
+    href="https://wa.me/919789985132?text=Dear%20PerpeX%20Business%20School%20Team%2C%20I%20hope%20you%20are%20doing%20well.%20I%20am%20interested%20in%20learning%20more%20about%20your%20BD%20Training%20programs%20and%20placement%20support.%20Could%20you%20please%20provide%20more%20details%20about%20admissions%20or%20let%20me%20know%20a%20suitable%20time%20to%20discuss%20further%3F%20Looking%20forward%20to%20your%20response.%20Best%20regards%2C%20Student" 
     target="_blank" 
     rel="noopener noreferrer"
     className="text-green-600 font-bold underline"

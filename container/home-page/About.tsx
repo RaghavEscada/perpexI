@@ -1065,7 +1065,7 @@ export default function BusinessDevelopmentSite() {
   const programsData = [
     {
       title: "Fundamentals in Business Development",
-      duration: "3 Months",
+      duration: "6 Months",
       icon: "🎓",
       outcomes: [
         "Core business concepts",
@@ -1079,7 +1079,7 @@ export default function BusinessDevelopmentSite() {
     },
     {
       title: "Corporate Ready Bootcamp",
-      duration: "6 Months", 
+      duration: "1 Month", 
       icon: "💼",
       outcomes: [
         "Corporate leadership skills",
@@ -1091,37 +1091,11 @@ export default function BusinessDevelopmentSite() {
       colors: [[168, 85, 247], [147, 51, 234]],
       containerColor: "bg-purple-900"
     },
+    
+   
     {
-      title: "Practical MBA (Mini-MBA)",
-      duration: "12 Months",
-      icon: "📈",
-      outcomes: [
-        "Comprehensive business knowledge",
-        "Strategic decision making",
-        "Advanced management skills",
-        "Financial analysis and planning"
-      ],
-      description: "Get MBA-level knowledge with practical, real-world applications.",
-      colors: [[34, 197, 94], [22, 163, 74]],
-      containerColor: "bg-emerald-900"
-    },
-    {
-      title: "Entrepreneurship Track", 
-      duration: "9 Months",
-      icon: "🚀",
-      outcomes: [
-        "Startup development skills",
-        "Business model creation",
-        "Venture funding knowledge",
-        "Innovation and disruption strategies"
-      ],
-      description: "Launch your entrepreneurial journey with comprehensive startup training.",
-      colors: [[249, 115, 22], [234, 88, 12]],
-      containerColor: "bg-orange-900"
-    },
-    {
-      title: "BXP",
-      duration: "6 Months",
+      title: "BXP (Business Execution Program)",
+      duration: "3 Months",
       icon: "🎯",
       outcomes: [
         "Business expansion strategies", 
@@ -1133,20 +1107,7 @@ export default function BusinessDevelopmentSite() {
       colors: [[239, 68, 68], [220, 38, 38]],
       containerColor: "bg-red-900"
     },
-    {
-      title: "EDGE-P",
-      duration: "4 Months",
-      icon: "⭐",
-      outcomes: [
-        "Professional development",
-        "Career advancement skills", 
-        "Industry-specific expertise",
-        "Leadership and executive presence"
-      ],
-      description: "Gain the professional edge needed for career advancement.",
-      colors: [[99, 102, 241], [79, 70, 229]],
-      containerColor: "bg-indigo-900"
-    }
+  
   ];
 
   return (

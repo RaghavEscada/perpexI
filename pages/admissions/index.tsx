@@ -9,20 +9,17 @@ const AdmissionsFaq = () => {
   const faqs = [
     {
       question: "What are the admission requirements?",
-      answer: "Candidates must have completed higher secondary education (12th grade) with minimum 50% marks and proficiency in English. Additional program-specific requirements may apply."
+      answer: "Candidates must have completed higher secondary education (12th grade) with proficiency in English. Additional program-specific requirements may apply."
     },
     {
       question: "How long is the program duration?",
-      answer: "Our programs range from 6 months to 2 years depending on the specialization and level of study. Each program is designed for optimal career outcomes."
+      answer: "Our programs range from 3 months to 1 year depending on the specialization and level of study. Each program is designed for optimal career outcomes."
     },
     {
       question: "Is placement assistance provided?",
-      answer: "Yes, we provide guaranteed placement assistance with our industry partners and maintain a 97% placement rate with leading companies."
+      answer: "Yes, we provide placement assistance with our industry partners and maintain a 97% placement rate with leading companies."
     },
-    {
-      question: "Are scholarships available?",
-      answer: "We offer merit-based, need-based, and special category scholarships up to 75% of program fees. Apply early for best consideration."
-    },
+   
     {
       question: "What is the application deadline?",
       answer: "Applications are accepted year-round with multiple intake periods. Early applications receive priority consideration for scholarships."
@@ -86,14 +83,14 @@ const AdmissionsTimeline = () => {
       step: "01",
       title: "Application Submission",
       content: "Submit your comprehensive application with academic transcripts, personal statement, and supporting documents through our streamlined digital platform.",
-      duration: "2-3 days",
+      duration: "1 day",
       icon: FileText
     },
     {
       step: "02", 
       title: "Document Verification",
       content: "Our dedicated admissions committee conducts thorough verification of all submitted documents to ensure authenticity and completeness.",
-      duration: "5-7 days",
+      duration: "1-2 day(s)",
       icon: CheckCircle
     },
     {
@@ -121,7 +118,7 @@ const AdmissionsTimeline = () => {
       step: "06",
       title: "Enrollment Confirmation",
       content: "Complete your enrollment journey by confirming your seat, selecting courses, and joining our distinguished community of future leaders.",
-      duration: "1-2 weeks",
+      duration: "2-3 days",
       icon: GraduationCap
     }
   ];
@@ -201,144 +198,20 @@ const AdmissionsTimeline = () => {
 };
 
 
-// Enhanced Application Form
+// Tally Form Component - Same as contact page
 const AdmissionsForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    program: '',
-    experience: '',
-    motivation: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log('Form submitted:', formData);
-    setIsSubmitting(false);
-  };
-
-  const programs = [
-    "Business Management",
-    "Sales Training", 
-    "Entrepreneurship",
-    "Digital Marketing",
-    "Data Analytics",
-    "Product Management"
-  ];
-
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="space-y-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-3">
-            <label className="block text-blue-100 font-bold text-lg">Full Name *</label>
-            <input
-              type="text"
-              required
-              className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white placeholder-blue-300/50 focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-lg"
-              placeholder="Enter your full name"
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-            />
-          </div>
-          <div className="space-y-3">
-            <label className="block text-blue-100 font-bold text-lg">Email Address *</label>
-            <input
-              type="email"
-              required
-              className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white placeholder-blue-300/50 focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-lg"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-            />
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-3">
-            <label className="block text-blue-100 font-bold text-lg">Phone Number *</label>
-            <input
-              type="tel"
-              required
-              className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white placeholder-blue-300/50 focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-lg"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            />
-          </div>
-          <div className="space-y-3">
-            <label className="block text-blue-100 font-bold text-lg">Program of Interest *</label>
-            <select
-              required
-              className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-lg"
-              value={formData.program}
-              onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-            >
-              <option value="" className="bg-slate-800">Select a program</option>
-              {programs.map(program => (
-                <option key={program} value={program} className="bg-slate-800">{program}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <label className="block text-blue-100 font-bold text-lg">Previous Experience</label>
-          <textarea
-            className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white placeholder-blue-300/50 focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 h-32 resize-none transition-all duration-300 text-lg"
-            placeholder="Tell us about your previous experience or background"
-            value={formData.experience}
-            onChange={(e) => setFormData({...formData, experience: e.target.value})}
-          />
-        </div>
-
-        <div className="space-y-3">
-          <label className="block text-blue-100 font-bold text-lg">Why do you want to join us?</label>
-          <textarea
-            className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl text-white placeholder-blue-300/50 focus:border-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 h-32 resize-none transition-all duration-300 text-lg"
-            placeholder="Share your motivation and goals"
-            value={formData.motivation}
-            onChange={(e) => setFormData({...formData, motivation: e.target.value})}
-          />
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-6 pt-8 justify-center">
-          <motion.button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-12 py-5 rounded-full font-bold transition-all duration-500 text-white shadow-2xl hover:shadow-blue-500/25 transform hover:scale-110 flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {isSubmitting ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                Submitting Application...
-              </>
-            ) : (
-              <>
-                <Zap className="w-6 h-6" />
-                Submit Application
-              </>
-            )}
-          </motion.button>
-          
-          <motion.button 
-            type="button"
-            className="group border-2 border-blue-400/50 hover:border-blue-300 hover:bg-blue-500/10 px-12 py-5 rounded-full font-bold transition-all duration-500 text-white backdrop-blur-sm transform hover:scale-110 flex items-center justify-center gap-3 text-lg"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <FileText className="w-6 h-6" />
-            Save as Draft
-          </motion.button>
-        </div>
-      </div>
+    <div className="w-full h-[80vh] bg-white shadow-2xl rounded-2xl overflow-hidden">
+      <iframe
+        src="https://tally.so/embed/mYbXMB?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        width="100%"
+        height="100%"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+        title="PerpeX Business School Admission Application Form"
+        className="w-full h-full"
+      ></iframe>
     </div>
   );
 };
@@ -368,14 +241,14 @@ export default function AdmissionsPage() {
     { 
       icon: GraduationCap, 
       title: "Academic Foundation", 
-      desc: "12th grade or equivalent from recognized board",
-      percentage: "50% minimum"
+      desc: "Graduation or equivalent from recognized board preffered.",
+      percentage: "Miniumum 12th "
     },
     { 
       icon: TrendingUp, 
-      title: "Performance", 
-      desc: "Minimum aggregate marks with relaxation for reserved categories",
-      percentage: "Merit based"
+      title: "Competitive Readiness", 
+      desc: "Ready to face entrepreneurial challenges",
+      percentage: "PRO Mentality"
     },
     { 
       icon: Users, 
@@ -391,33 +264,7 @@ export default function AdmissionsPage() {
     }
   ];
 
-  const scholarshipData = [
-    { 
-      icon: Trophy, 
-      title: "Merit Excellence", 
-      desc: "Top academic performers and exceptional talent",
-      percentage: "Up to 75%"
-    },
-    { 
-      icon: Users, 
-      title: "Need Support", 
-      desc: "Financial assistance for economically weaker sections",
-      percentage: "Up to 50%"
-    },
-    { 
-      icon: Star, 
-      title: "Diversity Focus", 
-      desc: "Supporting underrepresented groups and minorities",
-      percentage: "Up to 60%"
-    },
-    { 
-      icon: Crown, 
-      title: "Talent Based", 
-      desc: "Special skills, leadership, and entrepreneurial spirit",
-      percentage: "Up to 40%"
-    }
-  ];
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white relative overflow-hidden">
       <FloatingElements />
@@ -521,7 +368,7 @@ export default function AdmissionsPage() {
         {/* Timeline Section */}
         <AdmissionsTimeline />
 
-        {/* Scholarships Section */}
+        {/* Scholarships Section
         <section className="py-24">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-blue-600/10 backdrop-blur-xl border border-blue-400/20 rounded-full px-8 py-3 mb-8 shadow-xl">
@@ -573,7 +420,7 @@ export default function AdmissionsPage() {
               );
             })}
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ Section */}
         <section className="py-24">
