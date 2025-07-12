@@ -1,3 +1,5 @@
+import { hostname } from 'os';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -20,8 +22,21 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
-    ],
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      }
+         ],
   },
+ 
 };
 
 export default nextConfig;

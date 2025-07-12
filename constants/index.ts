@@ -27,11 +27,21 @@ export const navbarItems = [
   },
   {
     id: 6,
+    title: "Gallery",
+    href: "/gallery",
+  },
+  {
+    id: 7,
+    title: "Blogs",
+    href: "/blog",
+  },
+  {
+    id: 8,
     title: "About Us",
     href: "/about-us",
   },
   {
-    id: 7,
+    id: 9,
     title: "Contact",
     href: "/contact",
   },

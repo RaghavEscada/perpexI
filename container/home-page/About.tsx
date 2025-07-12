@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight, Instagram, Linkedin, MessageCircle, Award, Users, BookOpen, TrendingUp, CheckCircle, Star, Briefcase, Target, GraduationCap, Rocket, Clock } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
 import AdmissionsPage from '@/components/ui/timeline';
+import { getCourses, Course } from "../../lib/getCourses";
 
 // Add type definitions for GSAP and ScrollTrigger
 declare global {
@@ -976,12 +977,23 @@ const ProgramCard = ({ data }: { data: any }) => {
           {/* Key Outcomes */}
           <div className="space-y-2 mb-6">
             <h4 className="text-blue-200 font-semibold text-sm mb-3">Key Outcomes:</h4>
-            {data.outcomes.slice(0, 3).map((outcome: string, idx: number) => (
-              <div key={idx} className="flex items-start text-left">
-                <CheckCircle className="w-4 h-4 mr-2 mt-0.5 text-green-400 flex-shrink-0" />
-                <span className="text-gray-200 text-sm">{outcome}</span>
-              </div>
-            ))}
+            {Array.isArray(data.keyOutcomes) && data.keyOutcomes.length > 0 ? (
+              data.keyOutcomes.slice(0, 3).map((outcome: string, idx: number) => (
+                <div key={idx} className="flex items-start text-left">
+                  <CheckCircle className="w-4 h-4 mr-2 mt-0.5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-200 text-sm">{outcome}</span>
+                </div>
+              ))
+            ) : Array.isArray(data.outcomes) && data.outcomes.length > 0 ? (
+              data.outcomes.slice(0, 3).map((outcome: string, idx: number) => (
+                <div key={idx} className="flex items-start text-left">
+                  <CheckCircle className="w-4 h-4 mr-2 mt-0.5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-200 text-sm">{outcome}</span>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-400 text-sm italic">No outcomes listed.</div>
+            )}
           </div>
 
           {/* Learn More Button */}
@@ -1062,53 +1074,23 @@ export const Icon = ({ className, ...rest }: any) => {
 };
 
 export default function BusinessDevelopmentSite() {
-  const programsData = [
-    {
-      title: "Fundamentals in Business Development",
-      duration: "6 Months",
-      icon: "🎓",
-      outcomes: [
-        "Core business concepts",
-        "Market analysis skills", 
-        "Business strategy fundamentals",
-        "Customer relationship management"
-      ],
-      description: "Build a solid foundation in business development principles and practices.",
-      colors: [[59, 130, 246], [37, 99, 235]],
-      containerColor: "bg-blue-900"
-    },
-    {
-      title: "Corporate Ready Bootcamp",
-      duration: "1 Month", 
-      icon: "💼",
-      outcomes: [
-        "Corporate leadership skills",
-        "Project management expertise",
-        "Corporate strategy implementation",
-        "Team leadership and communication"
-      ],
-      description: "Prepare yourself for high-level corporate roles and leadership positions.",
-      colors: [[168, 85, 247], [147, 51, 234]],
-      containerColor: "bg-purple-900"
-    },
-    
-   
-    {
-      title: "BXP (Business Execution Program)",
-      duration: "3 Months",
-      icon: "🎯",
-      outcomes: [
-        "Business expansion strategies", 
-        "Market penetration techniques",
-        "Growth optimization skills",
-        "International business development"
-      ],
-      description: "Master business expansion and growth strategies for scaling companies.",
-      colors: [[239, 68, 68], [220, 38, 38]],
-      containerColor: "bg-red-900"
-    },
-  
-  ];
+  const [programsData, setProgramsData] = useState<Course[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchCourses() {
+      try {
+        const courses = await getCourses();
+        setProgramsData(courses);
+      } catch (err) {
+        setError("Failed to load courses from Sanity.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchCourses();
+  }, []);
 
   return (
     <div className="bg-white pb-0 text-gray-900">
@@ -1213,19 +1195,30 @@ export default function BusinessDevelopmentSite() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {programsData.map((program, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <ProgramCard data={program} />
-              </motion.div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="text-center text-white">
+              <div className="inline-block w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+              <p className="mt-4">Loading programs...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center text-white bg-red-500/20 p-4 rounded-lg max-w-md mx-auto">
+              <p>{error}</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {programsData.map((program) => (
+                <motion.div
+                  key={program._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <ProgramCard data={program} />
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
 
         <style jsx>{`
