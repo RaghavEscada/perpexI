@@ -29,7 +29,7 @@ export default function Navbar() {
     <>
       {/* Enhanced Navbar */}
       <motion.nav
-        className="w-full h-20 px-8 md:px-12 fixed top-0 left-0 z-50 transition-all duration-300"
+        className="w-full h-20 px-8 md:px-12 fixed top-0 left-0 z-50 transition-all duration-300 bg-transparent"
         animate={{
           y: hidden ? -100 : 0,
           opacity: hidden ? 0 : 1
@@ -37,10 +37,7 @@ export default function Navbar() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {/* Dynamic Background */}
-        <div className="absolute inset-0 transition-all duration-500">
-
-
-        </div>
+        <div className="absolute inset-0 transition-all duration-500 bg-transparent" />
 
         <div className="relative z-10 h-full flex items-center justify-between max-w-7xl mx-auto">
           {/* Enhanced Logo Section */}
@@ -66,10 +63,10 @@ export default function Navbar() {
                 />
 
                 {/* Glow effect */}
-                <motion.div
+                {/* <motion.div
                   className="absolute inset-0 bg-white/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100"
                   transition={{ duration: 0.3 }}
-                />
+                /> */}
 
                 {/* Corner accent */}
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full opacity-80" />
@@ -106,10 +103,10 @@ export default function Navbar() {
                     />
 
                     {/* Hover background */}
-                    <motion.div
+                    {/* <motion.div
                       className="absolute inset-0 bg-white/5 rounded-md opacity-0 group-hover:opacity-100"
                       transition={{ duration: 0.2 }}
-                    />
+                    /> */}
                   </Link>
                 </motion.div>
               ))}

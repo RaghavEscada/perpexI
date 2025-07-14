@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Star, Instagram, Linkedin, MessageCircle, Target, Zap, Eye, TrendingUp, Briefcase, Users, Award, Sparkles, Crown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import Team from "@/container/about-page/Team";
 
 declare global {
   interface Window {
@@ -888,6 +889,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      <Team />
     </div>
   );
 }
