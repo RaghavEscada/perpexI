@@ -1,5 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the Testimonial section from the home page
+const Testimonial = dynamic(() => import('../../container/home-page/Clients'), { ssr: false });
 
 interface ITestimonial {
   quote: string;
@@ -95,6 +99,11 @@ const SuccessStoriesPage = () => {
                 <h1 className="text-5xl font-bold mb-2">Success Stories</h1>
                 <p className="text-lg text-gray-400">See what our graduates have accomplished.</p>
             </header>
+
+            {/* Home Page Testimonial Section */}
+            <div className="mb-16">
+                <Testimonial />
+            </div>
 
             <div className="flex justify-center gap-8 mb-12">
                 <div className="flex flex-col">

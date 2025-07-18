@@ -1,4 +1,4 @@
-export default {
+const gallery = {
   name: 'gallery',
   title: 'Gallery',
   type: 'document',
@@ -47,4 +47,6 @@ export default {
       validation: (Rule: any) => Rule.min(4).max(4).error('Exactly 4 folders required'),
     },
   ],
-}; 
+};
+
+export default gallery;

@@ -1,4 +1,5 @@
 import { getBlogs, Blog, urlFor } from '@/lib/getBlogs';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const revalidate = 60;
@@ -92,7 +93,7 @@ export default async function BlogTestPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 <div className="h-48 w-full relative overflow-hidden">
-                  <img 
+                  <Image
                     src={getImageSrc(blog)} 
                     alt={blog.title}
                     className="object-cover w-full h-full"

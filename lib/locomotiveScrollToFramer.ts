@@ -20,9 +20,9 @@ interface LocomotiveScrollInstance {
   scrollTo: (target: string | HTMLElement, options?: any) => void;
   update: () => void;
   destroy: () => void;
-  // Note: in v5, event handlers are added differently
   events: {
     on: (event: string, callback: (args?: any) => void) => void;
+    off: (event: string, callback: (args?: any) => void) => void;
   };
 }
 
@@ -33,51 +33,41 @@ export const useLocomotiveScrollToFramer = (
     onScroll?: (scrollY: number) => void;
   } = {}
 ) => {
-  const locomotiveScrollRef = useRef<any>(null);
-  
+  const locomotiveScrollRef = useRef<LocomotiveScrollInstance | null>(null);
+  // Store the scroll handler so we can remove it on cleanup
+  const scrollHandlerRef = useRef<((args: any) => void) | null>(null);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
+    let isMounted = true;
+
     const initLocomotiveScroll = async () => {
       try {
-        // Import LocomotiveScroll
         const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        
-        if (containerRef.current) {
-          // Initialize LocomotiveScroll
+
+        if (containerRef.current && isMounted) {
           locomotiveScrollRef.current = new LocomotiveScroll({
             el: containerRef.current,
             smooth: true,
             multiplier: 1,
             getDirection: true,
-            smartphone: {
-              smooth: true
-            },
-            tablet: {
-              smooth: true
-            }
-          });
+          } as any) as unknown as LocomotiveScrollInstance;
 
-          // Add scroll event listener using v5 API
-          // In v5, we need to use events.on instead of directly using .on
-          if (locomotiveScrollRef.current.scroll) {
-            // For v5 beta API
-            locomotiveScrollRef.current.scroll.on('scroll', (args: any) => {
+          // Set up scroll event listener for v5 API
+          if (
+            locomotiveScrollRef.current &&
+            locomotiveScrollRef.current.events &&
+            typeof locomotiveScrollRef.current.events.on === 'function'
+          ) {
+            const handler = (args: any) => {
               if (scrollCallbacks.onScroll) {
-                // Get the scroll position
-                const scrollY = args.scroll ? args.scroll.y : args.y;
+                const scrollY = args?.scroll?.y ?? args?.y ?? 0;
                 scrollCallbacks.onScroll(scrollY);
               }
-            });
-          } else if (locomotiveScrollRef.current.events) {
-            // Alternative v5 API structure
-            locomotiveScrollRef.current.events.on('scroll', (args: any) => {
-              if (scrollCallbacks.onScroll) {
-                // Get the scroll position
-                const scrollY = args.scroll ? args.scroll.y : args.y;
-                scrollCallbacks.onScroll(scrollY);
-              }
-            });
+            };
+            scrollHandlerRef.current = handler;
+            locomotiveScrollRef.current.events.on('scroll', handler);
           }
         }
       } catch (error) {
@@ -88,10 +78,20 @@ export const useLocomotiveScrollToFramer = (
     initLocomotiveScroll();
 
     return () => {
+      isMounted = false;
+      if (
+        locomotiveScrollRef.current &&
+        locomotiveScrollRef.current.events &&
+        typeof locomotiveScrollRef.current.events.off === 'function' &&
+        scrollHandlerRef.current
+      ) {
+        locomotiveScrollRef.current.events.off('scroll', scrollHandlerRef.current);
+      }
       if (locomotiveScrollRef.current) {
         locomotiveScrollRef.current.destroy();
         locomotiveScrollRef.current = null;
       }
+      scrollHandlerRef.current = null;
     };
   }, [containerRef, scrollCallbacks]);
 

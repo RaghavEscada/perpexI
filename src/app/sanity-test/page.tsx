@@ -50,7 +50,7 @@ export default async function SanityTestPage() {
         <div className="mb-6">
           <h2 className="text-lg font-semibold mb-2">Posts from Sanity</h2>
           {posts.length === 0 ? (
-            <p>No posts found. Make sure you have documents of type 'post' in your Sanity dataset.</p>
+            <p>{`No posts found. Make sure you have documents of type 'post' in your Sanity dataset.`}</p>
           ) : (
             <ul className="list-disc pl-5">
               {posts.map((post) => (
@@ -68,4 +68,4 @@ export default async function SanityTestPage() {
       </div>
     </div>
   );
-} 
+}
